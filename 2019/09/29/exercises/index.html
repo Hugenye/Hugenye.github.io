@@ -22,7 +22,7 @@
     <meta name="description" content="日常学习积累，日常打卡，监督自己学习">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>hugenye&#39;s Studio</title>
+    <title>网上习题 · hugenye&#39;s Studio</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -77,6 +77,8 @@
 
     <link rel="preload" href="/css/style.css?v=20180824" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <link rel="stylesheet" href="/css/mobile.css?v=20180824" media="(max-width: 980px)">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     
     <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
 /* This file is meant as a standalone workflow for
@@ -201,14 +203,23 @@
 </head>
 
     
-        <body class="home-body">
+        <body class="post-body">
     
     
-<header class="header index-header">
+<header class="header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >hugenye&#39;s Studio.</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">网上习题</a>
+            </div>
+    </div>
     
     <a class="home-link" href=/>hugenye's Studio.</a>
 </header>
@@ -227,17 +238,17 @@ height:50vh;
     <!-- 主页  -->
     
     
-    <!-- 文章页  -->
+    <!-- 404页  -->
             
     <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/intro/index-bg.jpg)"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            hugenye's Studio.
-            <!-- 文章页  -->
+            网上习题
+            <!-- 404 -->
             
         </h1>
         <!-- 副标题 -->
@@ -245,12 +256,49 @@ height:50vh;
             <!-- 主页副标题  -->
             
             
-                it's better to burn out than to fade away
-            
-            <!-- 文章页  -->
+            <!-- 404 -->
             
         </p>
         <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "面试题">面试题</a>
+    
+</div>
+                
+                
+                    <div class="post-intro-read">
+                        <span>字数统计: <span class="post-count word-count">172</span>阅读时长: <span class="post-count reading-time">1 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2019/09/29</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
         
     </div>
 </div>
@@ -351,329 +399,94 @@ height:50vh;
 </script>        
         <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
         <div class="container container-unloaded">
-            <main class="main index-page">
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2019/09/29/exercises/" >
-            
-                <span>网上习题</span>
-        </a>
-        <div class="abstract-content">
-            计算机网络网络协议通俗理解
+            <main class="main post-page">
+    <article class="article-entry">
+        <h2 id="计算机网络"><a href="#计算机网络" class="headerlink" title="计算机网络"></a>计算机网络</h2><h3 id="网络协议通俗理解"><a href="#网络协议通俗理解" class="headerlink" title="网络协议通俗理解"></a>网络协议通俗理解</h3><table>
+<thead>
+<tr>
+<th align="center">OSI中的层</th>
+<th align="center">功能</th>
+<th align="center">TCP/IP协议</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">应用层</td>
+<td align="center">文件传输，电子邮件，文件服务，虚拟终端</td>
+<td align="center">TETP,HTTP,SNMP,FTP,SMTP,DNS,RIP,Telnet</td>
+</tr>
+<tr>
+<td align="center">表示层</td>
+<td align="center">数据格式化，代码转换，数据加密</td>
+<td align="center">没有协议</td>
+</tr>
+<tr>
+<td align="center">会话层</td>
+<td align="center">解除或建立于别的接点的联系</td>
+<td align="center">没有协议</td>
+</tr>
+<tr>
+<td align="center">传输层</td>
+<td align="center">提供端与端的接口</td>
+<td align="center">TCP,UDP</td>
+</tr>
+<tr>
+<td align="center">网络层</td>
+<td align="center">为数据包选择路由</td>
+<td align="center">IP,ICMP,OSPF,BGP,IGMP,ARP.RARP</td>
+</tr>
+<tr>
+<td align="center">数据链路层</td>
+<td align="center">传输有地址的帧以及错误检测功能</td>
+<td align="center">SLIP,CSLIP,PPP,MTU,ARP,RARP</td>
+</tr>
+<tr>
+<td align="center">物理层</td>
+<td align="center">以二进制数据形式在物理媒体上传输数据</td>
+<td align="center">ISO2110,IEEE802,IEEE802,2</td>
+</tr>
+</tbody></table>
 
-
-OSI中的层
-功能
-TCP/IP协议
-
-
-
-应用层
-文件传输，电子邮件，文件服务，虚拟终端
-TETP,HTTP,SNMP,FTP,SMTP,DNS,RIP,Telnet
-
-
-表示层
-数据格式化，代码转换，数据加密
-没有协议
-
-
-会话层
-解除或建立于别的接点的联系
-没有协议
-
-
-传输层
-提供端与端的接口
-TCP,UDP
-
-
-网络层
-为数据包选择路由
-IP,ICMP,OSPF,BGP,IGMP,ARP.RARP
-
-
-数据链路层
-传输有地址的帧以及错误检测功能
-SLIP,CSLIP,PPP,MTU,ARP,RARP
-
-
-物理层
-以二进制数据形式在物理媒体上传输数...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/09/29</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "面试题">面试题</a>
-    
-</div>
-            
-        </div>
     </article>
+    <!-- license  -->
     
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2019/09/24/python/" >
-            
-                <span>Python学习</span>
-        </a>
-        <div class="abstract-content">
-            Python的安装（免安装版）1、在官网下载地址，下载windows系统 下的zip安装包
-2、解压安装在c盘
-3、启动python
-123&gt;cd C: \python37 &gt;python Python 3. 7.4 (tags/v3. 7. 4:e09359112e, Jul 8 2019, 20:34:20) CMSC v. 1916 64 bit (kWD64)) on win32
+        <div class="license-wrapper">
+            <p>原文作者：<a href="http://yoursite.com">Hugenye</a>
+            <p>原文链接：<a href="http://yoursite.com/2019/09/29/exercises/">http://yoursite.com/2019/09/29/exercises/</a>
+            <p>发表日期：<a href="http://yoursite.com/2019/09/29/exercises/">September 29th 2019, 1:17:20 pm</a>
+            <p>更新日期：<a href="http://yoursite.com/2019/09/29/exercises/">September 29th 2019, 4:35:28 pm</a>
+            <p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/09/24</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Python">Python</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2019/09/24/amcharts/" >
-            
-                <span>amCharts图表插件学习</span>
-        </a>
-        <div class="abstract-content">
-            初步了解amCharts是一个图表组件，支持柱状图、条形图、线形图、面积图、烛台图、雷达等基本图形，个人感觉色彩效果特别好，使用起来也很方便，是基于JavaScript和HTML的组合，一般我只用做图表，它还可以做地图，但是我没用过，我用的是amchart3，现在已经更新到4了，添加了ES6形式的图表操作。
-折线图画法12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/09/24</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2019/09/24/old-work/" >
-            
-                <span>以前工作内容（搬运网易云笔记）</span>
-        </a>
-        <div class="abstract-content">
-            发送短信工具集（阿里云）12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788package com.test.util;import java.io.IOException;import java.util.Random;import com.aliyuncs.DefaultAcsClient;import c...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/09/24</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "工作">工作</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2019/09/22/interview/" >
-            
-                <span>面试题</span>
-        </a>
-        <div class="abstract-content">
-            杭州智库1      set集合的底层结构
-1红黑树
-
-2       hashmap的底层结构 
-1底层结构是hash表数据结构，可以存入null键和null值，该集合线程不同步，效率较高，代替hashTable。实际上是一个“链表的数组”的数据结构。
-
-3      案例 图片上传的优化方法
-4      Redis有几种数据类型，分别是什么？
-1234565种，分别是String、list、set、hash、sort set；string 字符串（可以为整形、浮点型和字符串，统称为元素）list 列表（实现队列,元素不唯一，先入先出原则）set 集合（各不相同的元素）hash ha...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/09/22</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "面试">面试</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2019/08/11/hello-world/" >
-            
-                <span>Hello World 大家好</span>
-        </a>
-        <div class="abstract-content">
-            Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick StartCreate a new post1$ hexo new "My New Post"
-
-More info: Writing
-Run server1$ hexo server
-
-Mo...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/08/11</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
     
     <!-- paginator  -->
-    
-</main>
-            <!-- profile -->
+    <ul class="post-paginator">
+        <li class="next">
             
-            <div class="profile">
-    <img class="profile-avatar" alt="avatar" src= /avatar/tai.jpeg >
-    <div class="profile-name">Hugenye</div>
-    
-    <div class="profile-signature">
-        witness me
-    </div>
-    
-    
-    <div class="profile-social">
-        
-    
-        
+        </li>
+        <li class="previous">
             
-                <a href="mailto:hugenye66@163.com" class="iconfont-archer email" title=email ></a>
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2019/09/24/python/" title= "Python学习">
+                    <div class="prevTitle">Python学习</div>
+                </a>
             
-        
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
     
-        
-            
-                <a href="//github.com/Hugenye" class="iconfont-archer github" target="_blank" title=github></a>
-            
-        
     
-        
-            
-                <span class="iconfont-archer wechat" title=wechat>
-                  
-                  <img class="profile-qr" src="/assets/weixin.jpg" />
-                </span>
-            
-        
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
     
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
     
 
-    </div>
-    
-    
-        <div class="friends">
-            <div>FRIENDS</div>
-            
-                
-                    <span>
-                        <a href= //www.baidu.com target="_black">friendA</a>
-                    </span>
-                
-            
-                
-                    <span>
-                        <a href= //www.google.com target="_black">friendB</a>
-                    </span>
-                
-            
-                
-            
-        </div>
-    
-    
-        <div class="about-me">
-            <a href = "/about" >ABOUT ME</a>
-        </div>
-    
-</div>
+    <!-- 评论 -->
+</main>
+            <!-- profile -->
             
         </div>
         <footer class="footer footer-unloaded">
@@ -756,6 +569,24 @@ Mo...
 </footer>
     </div>
     <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#计算机网络"><span class="toc-number">1.</span> <span class="toc-text">计算机网络</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#网络协议通俗理解"><span class="toc-number">1.1.</span> <span class="toc-text">网络协议通俗理解</span></a></li></ol></li></ol>
+    </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
     <div class="sidebar sidebar-hide">
@@ -949,6 +780,8 @@ jsonContent:
     
     </div>
     <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
      
     </body>
 </html>
