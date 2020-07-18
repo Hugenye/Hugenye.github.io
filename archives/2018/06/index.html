@@ -348,28 +348,21 @@
     <article class="index-post">
         <a class="abstract-title" href = "/2018/06/16/aliba/" >
             
-                <span>企业部署阿里云服务器步骤</span>
+                <span>企业部署阿里云服务器(Windows)</span>
         </a>
         <div class="abstract-content">
-            用账号密码登录阿里
-1、买服务器
-2核4G 1M
+            一、用客户账号密码登录阿里ps：最好由客户本人注册，代客户注册会使客户的新人优惠失效，因为其识别主机，已经注册过新用户的主机就不能用了。
+二、需要购买的服务器清单2核4G 1M
 windows Server 2008 R2企业版 64
 一年大概1500元
-2、 数据库服务器
 MySQL 5.6
 1核1G
 存储空间100G
 一年大概2300元
-3、 添加dtu连接域名
+三、 购买域名，添加连接域名域名分为一级、二级、三级域名。比如www.baidu.com，baidu是一级域名，www是二级域名；
+比如etd.www.baidu.com,etdo就是三级域名
 域名解析:
-操作：域名与网站–&gt;云解析DNS–&gt;添加记录
-60.205.219.212是服务器的公网
-4、 配置安全组规则
-QServer服务器需要开通9710、9705端口
-平台服务器需要开通80端口（一般买完服务器默认都会开通）
-配置服务器(60.205.219.212(公) 172.17.27.9(私有))端口
-在本地远程连接如果出...
+操作：域名与网站（购买域名，进入控制台）–&gt;云解析DNS–...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -380,7 +373,7 @@ QServer服务器需要开通9710、9705端口
             
             <div class= abstract-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = "阿里云服务器步骤">阿里云服务器步骤</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = "阿里云服务器部署">阿里云服务器部署</a>
     
 </div>
             
@@ -601,28 +594,6 @@ QServer服务器需要开通9710、9705端口
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     <div class="total-and-search">
         <div class="total-archive">
         Total : 11
@@ -638,6 +609,11 @@ QServer服务器需要开通9710、9705端口
     
     <div class="archive-year"> 2020 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/18</span><a class="archive-post-title" href= "/2020/07/18/jdk8/" >JDK8新特性</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -684,11 +660,6 @@ QServer服务器需要开通9710、9705端口
         </li>
     
     
-        <li class="archive-post-item">
-            <span class="archive-post-date">08/11</span><a class="archive-post-title" href= "/2019/08/11/hello-world/" >Hello World 大家好</a>
-        </li>
-    
-    
     
     
     
@@ -704,7 +675,7 @@ QServer服务器需要开通9710、9705端口
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">06/16</span><a class="archive-post-title" href= "/2018/06/16/aliba/" >企业部署阿里云服务器步骤</a>
+            <span class="archive-post-date">06/16</span><a class="archive-post-title" href= "/2018/06/16/aliba/" >企业部署阿里云服务器(Windows)</a>
         </li>
     
     
@@ -728,15 +699,17 @@ QServer服务器需要开通9710、9705端口
     
         <span class="sidebar-tag-name" data-tags="python"><span class="iconfont-archer">&#xe606;</span>python</span>
     
+        <span class="sidebar-tag-name" data-tags="阿里云服务器部署"><span class="iconfont-archer">&#xe606;</span>阿里云服务器部署</span>
+    
         <span class="sidebar-tag-name" data-tags="JavaSE"><span class="iconfont-archer">&#xe606;</span>JavaSE</span>
-    
-        <span class="sidebar-tag-name" data-tags="阿里云服务器步骤"><span class="iconfont-archer">&#xe606;</span>阿里云服务器步骤</span>
-    
-        <span class="sidebar-tag-name" data-tags="面试题"><span class="iconfont-archer">&#xe606;</span>面试题</span>
     
         <span class="sidebar-tag-name" data-tags="http"><span class="iconfont-archer">&#xe606;</span>http</span>
     
+        <span class="sidebar-tag-name" data-tags="面试题"><span class="iconfont-archer">&#xe606;</span>面试题</span>
+    
         <span class="sidebar-tag-name" data-tags="工作"><span class="iconfont-archer">&#xe606;</span>工作</span>
+    
+        <span class="sidebar-tag-name" data-tags="JDK8新特性"><span class="iconfont-archer">&#xe606;</span>JDK8新特性</span>
     
         <span class="sidebar-tag-name" data-tags="Bootstrap"><span class="iconfont-archer">&#xe606;</span>Bootstrap</span>
     
@@ -776,6 +749,8 @@ jsonContent:
 </div>
         <div class="sidebar-panel-categories">
     <div class="sidebar-categories-name">
+    
+        <span class="sidebar-category-name" data-categories="JAVA"><span class="iconfont-archer">&#xe60a;</span>JAVA</span>
     
     </div>
     <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
