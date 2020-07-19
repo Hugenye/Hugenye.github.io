@@ -19,7 +19,7 @@
     
     <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
     
-    <meta name="description" content="日常学习积累，日常打卡，监督自己学习">
+    <meta name="description" content>
     <meta name="description" content="计算机网络网络协议通俗理解   OSI中的层 功能 TCP/IP协议    应用层 文件传输，电子邮件，文件服务，虚拟终端 TETP,HTTP,SNMP,FTP,SMTP,DNS,RIP,Telnet   表示层 数据格式化，代码转换，数据加密 没有协议   会话层 解除或建立于别的接点的联系 没有协议   传输层 提供端与端的接口 TCP,UDP   网络层 为数据包选择路由 IP,ICMP,O">
 <meta name="keywords" content="面试题">
 <meta property="og:type" content="article">
@@ -497,25 +497,25 @@ height:50vh;
 <!-- City版安装代码已完成 -->
     
     
-<div id="container"></div>
-<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
-<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
-<script>
-    var gitment = new Gitment({
-        id: 'Sun Sep 29 2019 13:17:20 GMT+0800', // 可选。默认为 location.href
-        owner: 'hugenye',
-        repo: 'https://github.com/Hugenye/Hugenye.github.io.git',
-        oauth: {
-            client_id: 'dd4d482de44bbb5a7d23',
-            client_secret: '828fb384ba22a63e8e008c2677ccc86bd8db3e60',
-        },
-    })
-    gitment.render('container')
-
-</script>
-
     <!-- gitalk评论 -->
 
+    <div id="comment-container"></div>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.6.0/dist/gitalk.css">
+    <script src="https://cdn.jsdelivr.net/npm/gitalk@1.6.0/dist/gitalk.min.js"></script>
+    <script>
+        var gitalk = new Gitalk({
+            clientID: 'dd4d482de44bbb5a7d23',
+            clientSecret: '828fb384ba22a63e8e008c2677ccc86bd8db3e60',
+            id: 'Sun Sep 29 2019 13:17:20 GMT+0800',
+            repo: 'hugenye.github.io',
+            owner: 'hugenye',
+            admin: "hugenye",
+            createIssueManually: true,
+            distractionFreeMode: false
+        })
+        gitalk.render('comment-container')
+    </script>
+    
     <!-- utteranc评论 -->
 
     <!-- partial('_partial/comment/changyan') -->
@@ -742,6 +742,22 @@ top:50vh;
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
         Total : 11
@@ -849,15 +865,15 @@ top:50vh;
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
-        <span class="sidebar-tag-name" data-tags="JavaSE"><span class="iconfont-archer">&#xe606;</span>JavaSE</span>
-    
         <span class="sidebar-tag-name" data-tags="阿里云服务器部署"><span class="iconfont-archer">&#xe606;</span>阿里云服务器部署</span>
     
         <span class="sidebar-tag-name" data-tags="python"><span class="iconfont-archer">&#xe606;</span>python</span>
     
-        <span class="sidebar-tag-name" data-tags="http"><span class="iconfont-archer">&#xe606;</span>http</span>
+        <span class="sidebar-tag-name" data-tags="JavaSE"><span class="iconfont-archer">&#xe606;</span>JavaSE</span>
     
         <span class="sidebar-tag-name" data-tags="面试题"><span class="iconfont-archer">&#xe606;</span>面试题</span>
+    
+        <span class="sidebar-tag-name" data-tags="http"><span class="iconfont-archer">&#xe606;</span>http</span>
     
         <span class="sidebar-tag-name" data-tags="JDK8新特性"><span class="iconfont-archer">&#xe606;</span>JDK8新特性</span>
     

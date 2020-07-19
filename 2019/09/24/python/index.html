@@ -19,7 +19,7 @@
     
     <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
     
-    <meta name="description" content="日常学习积累，日常打卡，监督自己学习">
+    <meta name="description" content>
     <meta name="description" content="Python简介python跨平台，python应用范围广（操作系统、web平台、3d动画、企业应用、云计算） 学习参考 python有很多BIF内置函数（dir(builtins)查看python中所用BIF） 12&amp;gt;&amp;gt;&amp;gt; dir(__builtins__)  纯小写的是内置函数[&apos;ArithmeticError&apos;, &apos;AssertionError&apos;, &apos;AttributeEr">
 <meta name="keywords" content="Python">
 <meta property="og:type" content="article">
@@ -625,25 +625,25 @@ height:50vh;
 <!-- City版安装代码已完成 -->
     
     
-<div id="container"></div>
-<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
-<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
-<script>
-    var gitment = new Gitment({
-        id: 'Tue Sep 24 2019 20:37:52 GMT+0800', // 可选。默认为 location.href
-        owner: 'hugenye',
-        repo: 'https://github.com/Hugenye/Hugenye.github.io.git',
-        oauth: {
-            client_id: 'dd4d482de44bbb5a7d23',
-            client_secret: '828fb384ba22a63e8e008c2677ccc86bd8db3e60',
-        },
-    })
-    gitment.render('container')
-
-</script>
-
     <!-- gitalk评论 -->
 
+    <div id="comment-container"></div>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.6.0/dist/gitalk.css">
+    <script src="https://cdn.jsdelivr.net/npm/gitalk@1.6.0/dist/gitalk.min.js"></script>
+    <script>
+        var gitalk = new Gitalk({
+            clientID: 'dd4d482de44bbb5a7d23',
+            clientSecret: '828fb384ba22a63e8e008c2677ccc86bd8db3e60',
+            id: 'Tue Sep 24 2019 20:37:52 GMT+0800',
+            repo: 'hugenye.github.io',
+            owner: 'hugenye',
+            admin: "hugenye",
+            createIssueManually: true,
+            distractionFreeMode: false
+        })
+        gitalk.render('comment-container')
+    </script>
+    
     <!-- utteranc评论 -->
 
     <!-- partial('_partial/comment/changyan') -->
@@ -870,6 +870,22 @@ top:50vh;
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
         Total : 11
@@ -977,15 +993,15 @@ top:50vh;
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
-        <span class="sidebar-tag-name" data-tags="JavaSE"><span class="iconfont-archer">&#xe606;</span>JavaSE</span>
-    
         <span class="sidebar-tag-name" data-tags="阿里云服务器部署"><span class="iconfont-archer">&#xe606;</span>阿里云服务器部署</span>
     
         <span class="sidebar-tag-name" data-tags="python"><span class="iconfont-archer">&#xe606;</span>python</span>
     
-        <span class="sidebar-tag-name" data-tags="http"><span class="iconfont-archer">&#xe606;</span>http</span>
+        <span class="sidebar-tag-name" data-tags="JavaSE"><span class="iconfont-archer">&#xe606;</span>JavaSE</span>
     
         <span class="sidebar-tag-name" data-tags="面试题"><span class="iconfont-archer">&#xe606;</span>面试题</span>
+    
+        <span class="sidebar-tag-name" data-tags="http"><span class="iconfont-archer">&#xe606;</span>http</span>
     
         <span class="sidebar-tag-name" data-tags="JDK8新特性"><span class="iconfont-archer">&#xe606;</span>JDK8新特性</span>
     
