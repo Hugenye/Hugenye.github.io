@@ -1,0 +1,1293 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <!-- title -->
+
+
+
+
+<!-- keywords -->
+
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="author" content="Hugenye">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="Hugenye">
+    
+    <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
+    
+    <meta name="description" content>
+    <meta name="description" content="初步了解amCharts是一个图表组件，支持柱状图、条形图、线形图、面积图、烛台图、雷达等基本图形，个人感觉色彩效果特别好，使用起来也很方便，是基于JavaScript和HTML的组合，一般我只用做图表，它还可以做地图，但是我没用过，我用的是amchart3，现在已经更新到4了，添加了ES6形式的图表操作。 折线图画法1234567891011121314151617181920212223242">
+<meta property="og:type" content="article">
+<meta property="og:title" content="amCharts图表插件学习">
+<meta property="og:url" content="http://hugenye.github.io/2019/09/24/amcharts/index.html">
+<meta property="og:site_name" content="Hugenye个人博客">
+<meta property="og:description" content="初步了解amCharts是一个图表组件，支持柱状图、条形图、线形图、面积图、烛台图、雷达等基本图形，个人感觉色彩效果特别好，使用起来也很方便，是基于JavaScript和HTML的组合，一般我只用做图表，它还可以做地图，但是我没用过，我用的是amchart3，现在已经更新到4了，添加了ES6形式的图表操作。 折线图画法1234567891011121314151617181920212223242">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="file:///C:/Users/hgy/AppData/Local/Temp/msohtmlclip1/01/clip_image001.jpg">
+<meta property="og:updated_time" content="2019-09-24T11:57:28.687Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="amCharts图表插件学习">
+<meta name="twitter:description" content="初步了解amCharts是一个图表组件，支持柱状图、条形图、线形图、面积图、烛台图、雷达等基本图形，个人感觉色彩效果特别好，使用起来也很方便，是基于JavaScript和HTML的组合，一般我只用做图表，它还可以做地图，但是我没用过，我用的是amchart3，现在已经更新到4了，添加了ES6形式的图表操作。 折线图画法1234567891011121314151617181920212223242">
+<meta name="twitter:image" content="file:///C:/Users/hgy/AppData/Local/Temp/msohtmlclip1/01/clip_image001.jpg">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <link rel="alternate" href="/atom.xml" title="Hugenye的个人博客" type="application/atom+xml">
+    
+    <title>amCharts图表插件学习 · hugenye&#39;s Studio</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+</style>
+
+    <link rel="preload" href="/css/style.css?v=20180824" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="stylesheet" href="/css/mobile.css?v=20180824" media="(max-width: 980px)">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+(function( w ){
+	"use strict";
+	// rel=preload support test
+	if( !w.loadCSS ){
+		w.loadCSS = function(){};
+	}
+	// define on the loadCSS obj
+	var rp = loadCSS.relpreload = {};
+	// rel=preload feature support test
+	// runs once and returns a function for compat purposes
+	rp.support = (function(){
+		var ret;
+		try {
+			ret = w.document.createElement( "link" ).relList.supports( "preload" );
+		} catch (e) {
+			ret = false;
+		}
+		return function(){
+			return ret;
+		};
+	})();
+
+	// if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+	// then change that media back to its intended value on load
+	rp.bindMediaToggle = function( link ){
+		// remember existing media attr for ultimate state, or default to 'all'
+		var finalMedia = link.media || "all";
+
+		function enableStylesheet(){
+			link.media = finalMedia;
+		}
+
+		// bind load handlers to enable media
+		if( link.addEventListener ){
+			link.addEventListener( "load", enableStylesheet );
+		} else if( link.attachEvent ){
+			link.attachEvent( "onload", enableStylesheet );
+		}
+
+		// Set rel and non-applicable media type to start an async request
+		// note: timeout allows this to happen async to let rendering continue in IE
+		setTimeout(function(){
+			link.rel = "stylesheet";
+			link.media = "only x";
+		});
+		// also enable media after 3 seconds,
+		// which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+		setTimeout( enableStylesheet, 3000 );
+	};
+
+	// loop through link elements in DOM
+	rp.poly = function(){
+		// double check this to prevent external calls from running
+		if( rp.support() ){
+			return;
+		}
+		var links = w.document.getElementsByTagName( "link" );
+		for( var i = 0; i < links.length; i++ ){
+			var link = links[ i ];
+			// qualify links to those with rel=preload and as=style attrs
+			if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+				// prevent rerunning on link
+				link.setAttribute( "data-loadcss", true );
+				// bind listeners to toggle media back
+				rp.bindMediaToggle( link );
+			}
+		}
+	};
+
+	// if unsupported, run the polyfill
+	if( !rp.support() ){
+		// run once at least
+		rp.poly();
+
+		// rerun poly on an interval until onload
+		var run = w.setInterval( rp.poly, 500 );
+		if( w.addEventListener ){
+			w.addEventListener( "load", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		} else if( w.attachEvent ){
+			w.attachEvent( "onload", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		}
+	}
+
+
+	// commonjs
+	if( typeof exports !== "undefined" ){
+		exports.loadCSS = loadCSS;
+	}
+	else {
+		w.loadCSS = loadCSS;
+	}
+}( typeof global !== "undefined" ? global : this ) );
+</script>
+
+    <link rel="icon" href="/assets/hgy.ico">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js" as="script">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" as="script">
+    <link rel="preload" href="/scripts/main.js" as="script">
+    <link rel="preload" as="font" href="/font/Oswald-Regular.ttf" crossorigin>
+    <link rel="preload" as="font" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" crossorigin>
+    
+    <!-- fancybox -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+</head>
+
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="read-progress"></div>
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >Hugenye的个人博客</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">amCharts图表插件学习</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href=/>Hugenye的个人博客</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro" style="
+
+
+
+
+
+
+
+height:50vh;
+">
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            amCharts图表插件学习
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                
+                    <div class="post-intro-read">
+                        <span>字数统计: <span class="post-count word-count">4.3k</span>阅读时长: <span class="post-count reading-time">20 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2019/09/24</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+        <script>
+ 
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded');
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in');
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
+
+  function asyncErr(){
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (cb) { o.addEventListener('load', function (e) { cb(null, e); }, false); }
+    if (err) { o.addEventListener('error', function (e) { err(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+
+  var asyncLoadWithFallBack = function(arr, success, reject) {
+      var currReject = function(){
+        reject()
+        arr.shift()
+        if(arr.length)
+          async(arr[0], success, currReject)
+        }
+
+      async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack([
+    "https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", 
+    "https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js",
+    "/lib/webfontloader.min.js"
+  ], asyncCb, asyncErr)
+</script>        
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <h2 id="初步了解"><a href="#初步了解" class="headerlink" title="初步了解"></a>初步了解</h2><p>amCharts是一个图表组件，支持柱状图、条形图、线形图、面积图、烛台图、雷达等基本图形，个人感觉色彩效果特别好，使用起来也很方便，是基于JavaScript和HTML的组合，一般我只用做图表，它还可以做地图，但是我没用过，我用的是amchart3，现在已经更新到4了，添加了ES6形式的图表操作。</p>
+<h2 id="折线图画法"><a href="#折线图画法" class="headerlink" title="折线图画法"></a>折线图画法</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">base</span> <span class="attr">href</span>=<span class="string">"&lt;%=basePath%&gt;"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span>My JSP 'amchart.jsp' starting page<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"pragma"</span> <span class="attr">content</span>=<span class="string">"no-cache"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"cache-control"</span> <span class="attr">content</span>=<span class="string">"no-cache"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"expires"</span> <span class="attr">content</span>=<span class="string">"0"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"keywords"</span> <span class="attr">content</span>=<span class="string">"keyword1,keyword2,keyword3"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"description"</span> <span class="attr">content</span>=<span class="string">"This is my page"</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">	&lt;link rel="stylesheet" type="text/css" href="styles.css"&gt;</span></span><br><span class="line"><span class="comment">	--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="css"><span class="selector-id">#chartdiv0</span> &#123;</span></span><br><span class="line">  width: 50%;</span><br><span class="line">  height: 500px;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="css"><span class="selector-id">#chartdiv2</span> &#123;</span></span><br><span class="line">  width: 50%;</span><br><span class="line">  height: 500px;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- yibiaopan --&gt;</span>	</span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"chartdiv0"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span>	</span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://www.amcharts.com/lib/3/amcharts.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://www.amcharts.com/lib/3/serial.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://www.amcharts.com/lib/3/themes/light.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://www.amcharts.com/lib/3/plugins/export/export.min.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"https://www.amcharts.com/lib/3/plugins/export/export.css"</span> <span class="attr">type</span>=<span class="string">"text/css"</span> <span class="attr">media</span>=<span class="string">"all"</span> /&gt;</span>	</span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span></span><br><span class="line"><span class="actionscript">		<span class="keyword">var</span> chart1;	  </span></span><br><span class="line"><span class="javascript">		jQuery(<span class="built_in">document</span>).ready(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;			</span></span><br><span class="line"><span class="actionscript">				<span class="keyword">var</span> collect30 = [ &#123;day : <span class="string">"2018/2/4"</span>,	energy: <span class="number">71</span>,control:<span class="number">51</span>&#125;, </span></span><br><span class="line"><span class="actionscript">			     &#123;day : <span class="string">"2018/2/5"</span>,energy: <span class="number">1844</span>,control:<span class="number">1528</span>&#125;, </span></span><br><span class="line"><span class="actionscript">			     &#123;day : <span class="string">"2018/2/6"</span>,energy: <span class="number">2864</span>,control:<span class="number">2626</span>&#125;, </span></span><br><span class="line"><span class="actionscript">			     &#123;day : <span class="string">"2018/2/7"</span>,energy:<span class="number">2728</span>,control:<span class="number">2410</span>&#125;, </span></span><br><span class="line"><span class="actionscript">			     &#123;day : <span class="string">"2018/2/8"</span>,energy:<span class="number">2772</span>,control:<span class="number">2467</span>&#125; ];</span></span><br><span class="line"><span class="actionscript">			<span class="comment">//一共画折线图，要画图的对象，导入数据，画得div位置 </span></span></span><br><span class="line"><span class="actionscript">			amchartDisplay(chart1, collect30, <span class="string">"chartdiv0"</span>);			</span></span><br><span class="line">		&#125;);</span><br><span class="line">        </span><br><span class="line"><span class="actionscript">		<span class="comment">//amcharts画图函数 </span></span></span><br><span class="line"><span class="actionscript">		<span class="function"><span class="keyword">function</span> <span class="title">amchartDisplay</span><span class="params">(chart, chartData, div)</span> </span>&#123;</span></span><br><span class="line"><span class="actionscript">			chart = <span class="keyword">new</span> AmCharts.AmSerialChart();</span></span><br><span class="line"><span class="actionscript">			chart.panEventsEnabled = <span class="literal">true</span>;</span></span><br><span class="line">			chart.zoomOutButton = &#123;</span><br><span class="line"><span class="actionscript">				backgroundColor : <span class="string">"#000000"</span>,</span></span><br><span class="line"><span class="actionscript">				backgroundAlpha : <span class="number">0.15</span><span class="comment">//背景透明度</span></span></span><br><span class="line">			&#125;;</span><br><span class="line">			</span><br><span class="line">			/*//设置时间，和原有时间设置出现冲突，仅显示一部分</span><br><span class="line"><span class="actionscript">			chart.addListener(<span class="string">"dataUpdated"</span>, zoomChart);	</span></span><br><span class="line"><span class="actionscript">			<span class="function"><span class="keyword">function</span> <span class="title">zoomChart</span><span class="params">()</span> </span>&#123;</span></span><br><span class="line"><span class="javascript">			    chart.zoomToDates(<span class="keyword">new</span> <span class="built_in">Date</span>(<span class="number">2018</span>, <span class="number">2</span>, <span class="number">4</span>), <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="number">2018</span>, <span class="number">3</span>, <span class="number">20</span>));</span></span><br><span class="line">			&#125;*/			</span><br><span class="line">			</span><br><span class="line"><span class="actionscript">			chart.dataProvider = chartData;<span class="comment">//传入数据</span></span></span><br><span class="line"><span class="actionscript">			chart.validateData();<span class="comment">//校验数据</span></span></span><br><span class="line"><span class="actionscript">			chart.categoryField = <span class="string">"day"</span>;</span></span><br><span class="line"><span class="actionscript">			<span class="comment">//设置横坐标; </span></span></span><br><span class="line"><span class="actionscript">			<span class="keyword">var</span> categoryAxis = chart.categoryAxis;			</span></span><br><span class="line">			categoryAxis.gridAlpha = 0;</span><br><span class="line">			</span><br><span class="line"><span class="actionscript">			<span class="comment">// 设置纵坐标value                </span></span></span><br><span class="line"><span class="actionscript">			<span class="keyword">var</span> valueAxis = <span class="keyword">new</span> AmCharts.ValueAxis();</span></span><br><span class="line"><span class="actionscript">			valueAxis.axisColor = <span class="string">"#DADADA"</span>;</span></span><br><span class="line">			valueAxis.dashLength = 1;			</span><br><span class="line">			chart.addValueAxis(valueAxis);</span><br><span class="line"></span><br><span class="line"><span class="actionscript">			<span class="comment">// GRAPH </span></span></span><br><span class="line"><span class="actionscript">			<span class="keyword">var</span> graph = <span class="keyword">new</span> AmCharts.AmGraph();</span></span><br><span class="line"><span class="actionscript">			graph.type = <span class="string">"smoothedLine"</span>;</span></span><br><span class="line"><span class="actionscript">			graph.bullet = <span class="string">"round"</span>;<span class="comment">//节点形状</span></span></span><br><span class="line"><span class="actionscript">			graph.bulletColor = <span class="string">"#FFFFFF"</span>;</span></span><br><span class="line"><span class="actionscript">			graph.bulletBorderColor = <span class="string">"#00BBCC"</span>;</span></span><br><span class="line">			graph.bulletBorderThickness = 2;</span><br><span class="line">			graph.bulletSize = 7;</span><br><span class="line"><span class="actionscript">			graph.title = <span class="string">"能量值"</span>;</span></span><br><span class="line"><span class="actionscript">			graph.valueField = <span class="string">"energy"</span>;</span></span><br><span class="line">			graph.lineThickness = 2;</span><br><span class="line"><span class="actionscript">			graph.lineColor = <span class="string">"#FF0000"</span>;</span></span><br><span class="line">			chart.addGraph(graph);</span><br><span class="line">			</span><br><span class="line"><span class="actionscript">			<span class="keyword">var</span> graph = <span class="keyword">new</span> AmCharts.AmGraph();</span></span><br><span class="line"><span class="actionscript">			graph.type = <span class="string">"smoothedLine"</span>;</span></span><br><span class="line"><span class="actionscript">			graph.bullet = <span class="string">"round"</span>;</span></span><br><span class="line"><span class="actionscript">			graph.bulletColor = <span class="string">"#FFFFF"</span>;</span></span><br><span class="line"><span class="actionscript">			graph.bulletBorderColor = <span class="string">"#ff9900"</span>;</span></span><br><span class="line">			graph.bulletBorderThickness = 2;</span><br><span class="line">			graph.bulletSize = 7;</span><br><span class="line"><span class="actionscript">			graph.title = <span class="string">"控制后能量"</span>;</span></span><br><span class="line"><span class="actionscript">			graph.valueField = <span class="string">"control"</span>;</span></span><br><span class="line">			graph.lineThickness = 2;</span><br><span class="line"><span class="actionscript">			graph.lineColor = <span class="string">"#66CD00"</span>;</span></span><br><span class="line">			chart.addGraph(graph);</span><br><span class="line"><span class="actionscript">			<span class="comment">// CURSOR </span></span></span><br><span class="line"><span class="actionscript">			<span class="keyword">var</span> chartCursor = <span class="keyword">new</span> AmCharts.ChartCursor();</span></span><br><span class="line"><span class="actionscript">			chartCursor.cursorPosition = <span class="string">"mouse"</span>;</span></span><br><span class="line">			chart.addChartCursor(chartCursor);</span><br><span class="line"><span class="actionscript">			<span class="comment">// SCROLLBAR </span></span></span><br><span class="line"><span class="actionscript">			<span class="keyword">var</span> chartScrollbar = <span class="keyword">new</span> AmCharts.ChartScrollbar();</span></span><br><span class="line">			chart.addChartScrollbar(chartScrollbar);</span><br><span class="line"><span class="actionscript">			<span class="comment">// WRITE </span></span></span><br><span class="line"><span class="actionscript">			<span class="comment">//var parent = document.getElementById("#"+div);</span></span></span><br><span class="line"><span class="actionscript">			<span class="comment">//alert($("#chart").children().length);</span></span></span><br><span class="line"><span class="javascript">			<span class="keyword">if</span> ($(<span class="string">"#"</span>+div).children().length) <span class="comment">//注意，此处需要清空div内容，以避免浏览器缓存上次的图形信息。 </span></span></span><br><span class="line">			&#123;</span><br><span class="line"><span class="javascript">				$(<span class="string">"#"</span>+div).empty(); <span class="comment">//.is(":empty");  </span></span></span><br><span class="line">			&#125;</span><br><span class="line"><span class="actionscript">			chart.write(div);<span class="comment">//画图到指定的div上 </span></span></span><br><span class="line"></span><br><span class="line">		&#125;</span><br><span class="line">	<span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="柱状图画法"><a href="#柱状图画法" class="headerlink" title="柱状图画法"></a>柱状图画法</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">		<span class="comment">&lt;!-- Styles --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="css"><span class="selector-id">#chartdiv</span> &#123;</span></span><br><span class="line">	width	: 100%;</span><br><span class="line">	height	: 500px;</span><br><span class="line">&#125;													</span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- Resources --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://www.amcharts.com/lib/3/amcharts.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://www.amcharts.com/lib/3/serial.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://www.amcharts.com/lib/3/themes/light.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://www.amcharts.com/lib/3/plugins/export/export.min.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"https://www.amcharts.com/lib/3/plugins/export/export.css"</span> <span class="attr">type</span>=<span class="string">"text/css"</span> <span class="attr">media</span>=<span class="string">"all"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- Chart code --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="actionscript"><span class="keyword">var</span> chartData =[&#123;day:<span class="string">"2018/2/1"</span>,val1:<span class="number">0.34</span>,val2:<span class="number">45</span>&#125;,</span></span><br><span class="line"><span class="actionscript">                &#123;day:<span class="string">"2018/2/2"</span>,val1:<span class="number">0.89</span>,val2:<span class="number">15</span>&#125;,</span></span><br><span class="line"><span class="actionscript">               &#123;day:<span class="string">"2018/2/3"</span>,val1:<span class="number">0.3</span>,val2:<span class="number">35</span>&#125;,</span></span><br><span class="line"><span class="actionscript">                &#123;day:<span class="string">"2018/2/4"</span>,val1:<span class="number">0.60</span>,val2:<span class="number">47</span>&#125;,</span></span><br><span class="line"><span class="actionscript">                &#123;day:<span class="string">"2018/2/5"</span>,val1:<span class="number">0.37</span>,val2:<span class="number">45</span>&#125;];</span></span><br><span class="line"></span><br><span class="line"><span class="actionscript"><span class="keyword">var</span> chart = AmCharts.makeChart(<span class="string">"chartdiv"</span>, &#123;</span></span><br><span class="line"><span class="actionscript">    <span class="string">"type"</span>: <span class="string">"serial"</span>,</span></span><br><span class="line"><span class="actionscript">    <span class="string">"theme"</span>: <span class="string">"light"</span>,   </span></span><br><span class="line"><span class="actionscript">    <span class="string">"legend"</span>: &#123;</span></span><br><span class="line"><span class="actionscript">        <span class="string">"useGraphSettings"</span>: <span class="literal">true</span></span></span><br><span class="line">    &#125;,</span><br><span class="line"><span class="actionscript">    <span class="string">"dataProvider"</span>: chartData,</span></span><br><span class="line"><span class="actionscript">    <span class="string">"synchronizeGrid"</span>:<span class="literal">true</span>,</span></span><br><span class="line"><span class="actionscript">    <span class="string">"valueAxes"</span>: [&#123;</span></span><br><span class="line"><span class="actionscript">        <span class="string">"id"</span>:<span class="string">"v1"</span>,</span></span><br><span class="line"><span class="actionscript">        <span class="string">"axisColor"</span>: <span class="string">"#FF6600"</span>,</span></span><br><span class="line"><span class="actionscript">        <span class="string">"axisThickness"</span>: <span class="number">2</span>,</span></span><br><span class="line"><span class="actionscript">        <span class="string">"axisAlpha"</span>: <span class="number">1</span>,</span></span><br><span class="line"><span class="actionscript">        <span class="string">"position"</span>: <span class="string">"left"</span><span class="comment">//定位纵坐标的位置</span></span></span><br><span class="line">    &#125;, &#123;</span><br><span class="line"><span class="actionscript">        <span class="string">"id"</span>:<span class="string">"v2"</span>,</span></span><br><span class="line"><span class="actionscript">        <span class="string">"axisColor"</span>: <span class="string">"#FCD202"</span>,<span class="comment">//坐标轴的颜色</span></span></span><br><span class="line"><span class="actionscript">        <span class="string">"axisThickness"</span>: <span class="number">2</span>,</span></span><br><span class="line"><span class="actionscript">        <span class="string">"axisAlpha"</span>: <span class="number">1</span>,</span></span><br><span class="line"><span class="actionscript">        <span class="string">"position"</span>: <span class="string">"right"</span></span></span><br><span class="line">    &#125;],</span><br><span class="line"><span class="actionscript">    <span class="string">"graphs"</span>: [&#123;<span class="comment">//绘制图形</span></span></span><br><span class="line"><span class="actionscript">        <span class="string">"valueAxis"</span>: <span class="string">"v1"</span>,</span></span><br><span class="line"><span class="actionscript">        <span class="string">"lineColor"</span>: <span class="string">"#FF6600"</span>,</span></span><br><span class="line"><span class="actionscript">        <span class="string">"bullet"</span>: <span class="string">"round"</span>,</span></span><br><span class="line"><span class="actionscript">        <span class="string">"bulletBorderThickness"</span>: <span class="number">1</span>,</span></span><br><span class="line"><span class="actionscript">        <span class="string">"bulletColor"</span>:<span class="string">"#FFFFF"</span>,</span></span><br><span class="line"><span class="actionscript">        <span class="comment">//"bulletColor":"#FFFFF",</span></span></span><br><span class="line"><span class="actionscript">       <span class="comment">// "hideBulletsCount": 30,</span></span></span><br><span class="line"><span class="actionscript">        <span class="string">"title"</span>: <span class="string">"平均节能率"</span>,</span></span><br><span class="line"><span class="actionscript">        <span class="string">"valueField"</span>: <span class="string">"val1"</span>,</span></span><br><span class="line"><span class="actionscript">        <span class="string">"widthField"</span>:<span class="number">120</span>,</span></span><br><span class="line"><span class="actionscript">       <span class="comment">//  "labelOffset":1,</span></span></span><br><span class="line"><span class="actionscript">		<span class="string">"fillAlphas"</span>: <span class="number">1</span>,</span></span><br><span class="line"><span class="actionscript">		<span class="string">"type"</span>: <span class="string">"column"</span><span class="comment">//设置为矩形</span></span></span><br><span class="line">    &#125;, &#123;</span><br><span class="line"><span class="actionscript">        <span class="string">"valueAxis"</span>: <span class="string">"v2"</span>,</span></span><br><span class="line"><span class="actionscript">        <span class="string">"lineColor"</span>: <span class="string">"#FCD202"</span>,</span></span><br><span class="line"><span class="actionscript">        <span class="string">"bullet"</span>: <span class="string">"square"</span>,</span></span><br><span class="line"><span class="actionscript">        <span class="string">"bulletBorderThickness"</span>: <span class="number">1</span>,</span></span><br><span class="line"><span class="actionscript">        <span class="string">"bulletColor"</span>:<span class="string">"#FFFFF"</span>,</span></span><br><span class="line"><span class="actionscript">     <span class="comment">//   "hideBulletsCount": 30,</span></span></span><br><span class="line"><span class="actionscript">        <span class="string">"title"</span>: <span class="string">"数值2"</span>,</span></span><br><span class="line"><span class="actionscript">        <span class="string">"valueField"</span>: <span class="string">"val2"</span>,</span></span><br><span class="line"><span class="actionscript">       <span class="comment">// "labelOffset":40,</span></span></span><br><span class="line"><span class="actionscript">        <span class="string">"widthField"</span>:<span class="number">120</span>,</span></span><br><span class="line"><span class="actionscript">		<span class="string">"fillAlphas"</span>: <span class="number">1</span>,</span></span><br><span class="line"><span class="actionscript">		<span class="string">"type"</span>: <span class="string">"column"</span></span></span><br><span class="line">    &#125;],</span><br><span class="line"><span class="actionscript">    <span class="string">"chartScrollbar"</span>: &#123;	</span></span><br><span class="line">    &#125;,</span><br><span class="line"><span class="actionscript">    <span class="string">"chartCursor"</span>: &#123;</span></span><br><span class="line"><span class="actionscript">    	<span class="string">"bulletBorderColor"</span>:<span class="string">"yyyy/MM/dd"</span>,</span></span><br><span class="line"><span class="actionscript">        <span class="string">"cursorPosition"</span>: <span class="string">"mouse"</span></span></span><br><span class="line">    &#125;,</span><br><span class="line"><span class="actionscript">    <span class="string">"categoryField"</span>: <span class="string">"day"</span>,</span></span><br><span class="line"><span class="actionscript">    <span class="string">"categoryAxis"</span>: &#123;</span></span><br><span class="line"><span class="actionscript">        <span class="string">"dataDateFormat"</span> : <span class="string">"YYYY-MM-DD"</span>,</span></span><br><span class="line"><span class="actionscript">        <span class="string">"axisColor"</span>: <span class="string">"#DADADA"</span>,</span></span><br><span class="line"><span class="actionscript">        <span class="string">"minorGridEnabled"</span>: <span class="literal">true</span></span></span><br><span class="line">    &#125;,</span><br><span class="line"><span class="actionscript">    <span class="string">"export"</span>: &#123;</span></span><br><span class="line"><span class="actionscript">    	<span class="string">"enabled"</span>: <span class="literal">true</span>,</span></span><br><span class="line"><span class="actionscript">        <span class="string">"position"</span>: <span class="string">"bottom-right"</span></span></span><br><span class="line">     &#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- HTML --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"chartdiv"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span>			</span><br><span class="line">	<span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="amcharts图表使用大全："><a href="#amcharts图表使用大全：" class="headerlink" title="amcharts图表使用大全："></a>amcharts图表使用大全：</h2><p>amcharts图表使用大全</p>
+<p>Amcharts JS 版属性/方法详细说明书 </p>
+<p>1、 坐标轴(Y轴) </p>
+<p>序号 属性名/方法名 作用 对象获取方法/常用属性值 示例 </p>
+<p>1 valueAxis对象 图表的Y轴，一个图表中可以有多个Y轴 Var valueAxis = new AmCharts.ValueAxis(); </p>
+<p>2 axisColor 轴的颜色 valueAxis.axisColor= “#FF6600”; </p>
+<p>3 axisThickness 轴的宽度valueAxis.axisThickness = 1; </p>
+<p>4 gridAlpha 轴的透明度，值介于0-1之间，0全透明</p>
+<p> valueAxis1.gridAlpha = 0.2; </p>
+<p>5 tickLength 轴从下到上像左或右伸出来的延长线 </p>
+<p>valueAxis1.tickLength =0; </p>
+<p>6 minimum 轴的最小值，如果不设置那么最小值根据数据动态变化 </p>
+<p>valueAxis1.minimum = -100; </p>
+<p>7 maximum 轴的最大值，如果不设置那么最大值根据数据动态变化 </p>
+<p> valueAxis1.maximum = 100; </p>
+<p>8 title 轴的名称valueAxis1.title=”哈哈”; </p>
+<p>9 logarithmic 是否为对数函数分布，一般轴的刻度是均匀划分的分布， valueAxis1.logarithmic = </p>
+<p>当该属性设置为true的时候，刻度分布呈对数形式false; </p>
+<p>10 integersOnly 是否只显示整数，如果为true轴的刻度只显示整数形式valueAxis1.integersOnly = true; </p>
+<p>11 gridCount 最大刻度个数 valueAxis1.gridCount= 10; </p>
+<p>12 unit 单位 valueAxis1.unit =”%”; </p>
+<p>13 labelsEnabled 是否显示轴标签，默认值为truevalueAxis1.labelsEnabled = true; </p>
+<p>14 inside 轴的刻度值显示在表里面还是外面 valueAxis1.inside = true; 15 position 轴的位置，默认在左侧 valueAxis1.position= “left”; </p>
+<p>16 stackType valueAxis.stackType =”0%”; </p>
+<p>2、 categoryAxis(图表线，相当于X轴) </p>
+<p>序号 属性名/方法名 作用 对象获取方法/常用属性值 示例 </p>
+<p>1 valueAxis对象 图表的线，一个图表中可以有多个，每个对应一个Y轴或者共同拥有一个Y轴</p>
+<p>var categoryAxis = chart.categoryAxis; </p>
+<p>2 parseDates 是否以日期为x轴的值 True、falsecategoryAxis.parseDates = false; </p>
+<p>3 minPeriod 当以日期为x轴的时候x轴显示的最小范围SS:分钟 DD:天 categoryAxis.minPeriod = “SS” </p>
+<p>4 dashLength 破折线长度，默认为0是实心线categoryAxis.dashLength = 1; </p>
+<p>5 gridAlpha 网格的透明度，垂直x轴的刻度线形成网格categoryAxis.gridAlpha = 0.15; </p>
+<p>6 axisColor 轴的颜色categoryAxis.axisColor = “#DADADA”; </p>
+<p>7 position 轴的位置，默认在最下方 top:显示在上方 left:左侧right: 右侧   categoryAxis.position = “top”; </p>
+<p>8 gridPosition 网格位置categoryAxis.gridPosition = “start”; </p>
+<p>9 startOnAxis 是否从轴上开始绘制，默认为false，即第一个点绘制是从中间开始的，当设置为true、false</p>
+<p>categoryAxis.startOnAxis = true;</p>
+<p>true的时候，第一个点开始总是从Y轴上</p>
+<p>开始，结束总是在最后一个跟Y轴平行的</p>
+<p>轴上结束 </p>
+<p>10 gridColor 网格颜色 categoryAxis.gridColor= “#FFFFFF”; </p>
+<p>11 dateFormats 日期格式，将数据格式化成对应的日期格式categoryAxis.dateFormats = </p>
+<p>[{ </p>
+<p>period:’DD’, </p>
+<p>format: ‘DD’}, </p>
+<p>{period:’WW’, </p>
+<p>format: ‘MMM DD’}, </p>
+<p>{period: ‘MM’,format:’MMM’}, </p>
+<p>period: ‘YYYY’, </p>
+<p>format: ‘YYYY’ </p>
+<p>}]; </p>
+<p>12 minorGridEnabled Specifies if minor gridshould be true,false </p>
+<p>displayed. </p>
+<p>3、 Legend(图例) </p>
+<p>序号 属性名/方法名 作用 对象获取方法/常用属性值 示例 </p>
+<p>1 legend对象 在图表的上方或者下方显示图例，图例的颜色就是对应线条的颜色</p>
+<p>var legend = new AmCharts.AmLegend(); </p>
+<p>2 align 排列样式 center legend.align= “center”; </p>
+<p>3 marginLeft 左边缘 legend.marginLeft =0; </p>
+<p>4 title 标题 legend.title=”测试”; </p>
+<p>5 horizontalGap 水平间隔，一个图表可以有多个图例，图例之间的间隔用此属性 </p>
+<p> legend.horizontalGap = 10; </p>
+<p>6 equalWidths 是否等宽 legend.equalWidths =false;</p>
+<p>7 valueWidth 值的宽度，在图例的右侧会显示该线或者图表的当前选中的值，设置为0时则不显示值 </p>
+<p> legend.valueWidth = 120; </p>
+<p>8 switchType 暂时没明白什么意思 legend.switchType =”v”; </p>
+<p>4、 Guide(向导线) </p>
+<p>序号 属性名/方法名 作用 对象获取方法/常用属性值 示例 1 guide对象 向导线可以是一条根Y轴平行的线，也可以是一个矩形区域</p>
+<p>var guide = new AmCharts.Guide(); </p>
+<p>2 fillAlpha 区域透明度 guide.fillAlpha =0.1;</p>
+<p>3 lineAlpha 线透明度 guide.lineAlpha = 0;</p>
+<p>4 value 其实值，其实指对应Y坐标的值 guide.value = 50; </p>
+<p>5 toValue 到达值，其实指对应Y坐标的值，跟上面属性共同确定了一个从value到toValue的区域，宽度为图表的宽度，高度为(toValue-value)的绝对值 </p>
+<p> guide.toValue = 0; </p>
+<p>6 lineColor 相导线的颜色 guide.lineColor =”#CC0000”;</p>
+<p>7 dashLength 破折长度，默认为0为实心线条，设置值后为破折线 </p>
+<p> guide.dashLength = 4; </p>
+<p>8 label 标签，就是给向导线显示一个名字 guide.label = “平均值”; </p>
+<p>9 inside 是否让向导线显示在图形里面，默认为true True，false guide.inside = true; </p>
+<p>5、 Scrollbar(滚动条) </p>
+<p>序号 属性名/方法名 作用 对象获取方法/常用属性值 示例 </p>
+<p>1 scrollbar对象 滚动条可以选择图表显示的区域 </p>
+<p>var chartScrollbar = newAmCharts.ChartScrollbar(); </p>
+<p>3 backgroundAlpha滚动条背景透明度 </p>
+<p>chartScrollbar.backgroundAlpha= 0.1; </p>
+<p>4滚动条背景颜色backgroundColor </p>
+<p>chartScrollbar.backgroundColor=”#000000”; </p>
+<p>5 graphLineAlpha 图像线条的透明度 </p>
+<p>chartScrollbar.graphLineAlpha = 0.1; </p>
+<p>6 graphFillAlpha 图像的填充透明度 </p>
+<p>chartScrollbar.graphFillAlpha = 0; </p>
+<p>7 selectedGraphFillAlpha选中图像的填充色的透明度         b    chartScrollbar.selectedGraphFillAlpha = 0; </p>
+<p>8 selectedGraphLineAlpha选中区域的图像线条透明度chartScrollbar.selectedGraphLineAlpha = 0.25; </p>
+<p>9 scrollbarHeight滚动条高度chartScrollbar.scrollbarHeight = 30; </p>
+<p>10 selectedBackgroundColor选中区域的背景颜色 chartScrollbar.selectedBackgroundColor = “#FFFFFF”; </p>
+<p>6、 Graph (图表) </p>
+<p>序号 属性名/方法名 作用 对象获取方法/常用属性值 示例 </p>
+<p>1 graph对象 图像对象，必须有该属性 </p>
+<p>var graph1 = new AmCharts.AmGraph(); </p>
+<p>2 valueAxis 图像的Y轴，一个chart可以添加多个valueAxis</p>
+<p>graph1.valueAxis = graph，一个graph只能有一个valueAxis1;  </p>
+<p>*<em>var *</em>valueAxis1= *<em>new *</em>AmCharts.ValueAxis;//添加坐标轴</p>
+<p><strong>var *<em>valueAxis1= *</em>new **AmCharts.ValueAxis;//添加坐标轴<br>valueAxis1.id=</strong>“val2”</p>
+<p><strong>var *<em>valueAxis1= *</em>new **AmCharts.ValueAxis;//添加坐标轴<br>valueAxis1.id=</strong>“val2”<br>**valueAxis1.axisThickness</p>
+<p><strong>var *<em>valueAxis1= *</em>new **AmCharts.ValueAxis;//添加坐标轴<br>valueAxis1.id=</strong>“val2”<br><strong>valueAxis1.axisThickness<br>=</strong>1**;</p>
+<p><strong>var *<em>valueAxis1= *</em>new **AmCharts.ValueAxis;//添加坐标轴<br>valueAxis1.id=</strong>“val2”<br><strong>valueAxis1.axisThickness<br>=</strong>1<strong>;<br>valueAxis1.unit=</strong>“kwh”**;</p>
+<p><strong>var *<em>valueAxis1= *</em>new **AmCharts.ValueAxis;//添加坐标轴<br>valueAxis1.id=</strong>“val2”<br><strong>valueAxis1.axisThickness<br>=</strong>1<strong>;<br>valueAxis1.unit=</strong>“kwh”<strong>;<br>valueAxis1.position=</strong>“left”**;</p>
+<p><strong>var *<em>valueAxis1= *</em>new **AmCharts.ValueAxis;//添加坐标轴<br>valueAxis1.id=</strong>“val2”<br><strong>valueAxis1.axisThickness<br>=</strong>1<strong>;<br>valueAxis1.unit=</strong>“kwh”<strong>;<br>valueAxis1.position=</strong>“left”<strong>;<br>chart.addValueAxis</strong>(<strong>valueAxis1</strong>)**</p>
+<hr>
+<p><strong>//**</strong>图表**</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">var graph = new AmCharts.AmGraph();</span><br><span class="line"></span><br><span class="line">graph.bullet=&quot;round&quot;;</span><br><span class="line"></span><br><span class="line">graph.hideBulletsCount=30;</span><br><span class="line"></span><br><span class="line">graph.useLineColorForBulletBorder=true;</span><br><span class="line"></span><br><span class="line">// graph.fillAlphas=0.8;</span><br><span class="line"></span><br><span class="line">graph.lineAlpha=1;</span><br><span class="line"></span><br><span class="line">graph.id =aa; // 英文字段；</span><br><span class="line"></span><br><span class="line">graph.Title = &quot;能效&quot;+ &quot; Title&quot;;</span><br><span class="line"></span><br><span class="line">// console.log(deduplication(arr)[i])</span><br><span class="line"></span><br><span class="line">graph.valueField = aa; // 英文字段</span><br><span class="line"></span><br><span class="line">// graph.valueAxis=valueAxis1;</span><br><span class="line"></span><br><span class="line">graph.type = &quot;line&quot;; // 表示线性；</span><br><span class="line"></span><br><span class="line">graph.balloonText = &quot;能效&quot;+ &quot;:[[value]]&quot;;</span><br><span class="line"></span><br><span class="line">graph.valueAxis=&quot;val2&quot;;</span><br><span class="line"></span><br><span class="line">chart.addGraph(graph);</span><br></pre></td></tr></table></figure>
+
+
+
+<p>  3 valueField 指定一个字段作为Y坐标值 graph1.valueField = “visits”;</p>
+<p>4 bullet 图像的节点类型 graph1.bullet =”round”; </p>
+<p>5 dashLength 绘制图像时延时，默认为0秒，设置为正整数时可以看到动态生成效果 </p>
+<p> graph1.dashLength= 0; </p>
+<p>6 hideBulletsCount一个图像中当节点大于一定数值后隐藏节点形状 </p>
+<p> graph1.hideBulletsCount = 10; </p>
+<p>7 balloonText 节点显示的文本内容 </p>
+<p>graph1.balloonText = “<a href="[[visits]]">[date]</a>“;</p>
+<p> 8lineColor 图像线颜色 graph1.lineColor = “#d1655d”; </p>
+<p>9 connect 是否连接起来，是指如果数据有x轴值，但是y轴值丢失的时候，如果设置为true则忽略该点，设置为false则线条在此点处断开 </p>
+<p> graph1.connect = false; </p>
+<p>10 bulletBorderColor节点边框颜色 </p>
+<p>graph1.bulletBorderColor = “#FFFFFF”; </p>
+<p>11 bulletBorderThickness节点边框宽度 </p>
+<p>graph1.bulletBorderThickness = 2; </p>
+<p>12 customBulletField用户自定义节点字段</p>
+<p> graph.customBulletField = “bullet”; </p>
+<p>13 bulletOffset 节点偏移量 graph.bulletOffset =16; </p>
+<p>14 cornerRadiusTop graph.cornerRadiusTop = 8; </p>
+<p>15 bulletSize 节点大小 graph.bulletSize =14; </p>
+<p>16 colorField 颜色字段，颜色可以从数据中读取 graph1.colorField = “color”; </p>
+<p>17 type 图像类型，有line、column、smoothedLine类型，第一种为线形图，第二种为柱状图 </p>
+<p>graph1.type = “line”; line/column/smoothedLine </p>
+<p>18 fillAlphas 填充区透明度，默认为0，最大值为1，当设置值时，在线条跟x轴之间的区域会填充颜色 </p>
+<p>graph1.fillAlphas = 0.3; </p>
+<p>19 negativeLineColor当数值为负数时线条的颜色</p>
+<p> graph1.negativeLineColor =”#efcc26”; </p>
+<p>7、 Chart (amcharts 对象) </p>
+<p>序号 属性名/方法名 作用 对象获取方法/常用属性值 示例 </p>
+<p>1 chart对象 Amcharts 的核心对象 </p>
+<p>var chart = new AmCharts.AmSerialChart(); </p>
+<p>2 pathToImages 指定chart图片的引用地址 </p>
+<p>chart.pathToImages =”amcharts/images/“; </p>
+<p>3 zoomOutButton 设置放大/缩小按钮的背景色和透明度</p>
+<p> chart.zoomOutButton = { </p>
+<p>backgroundColor: </p>
+<p>‘#000000’, </p>
+<p>backgroundAlpha: 0.15 </p>
+<p>}; </p>
+<p>4 dataProvider 指定数据来源，一般指向一个数组对象 </p>
+<p>chart.dataProvider = chartData; </p>
+<p>5 categoryField 指定X轴由哪个字段决定 chart.categoryField = “date”; </p>
+<p>6 autoMargins 自动调整边距，如果设置为true则边距设置不起效 </p>
+<p> chart.autoMargins = true; </p>
+<p>7 fontSize 字体大小 chart.fontSize = 14;</p>
+<p>8 color 图标颜色 chart.color =”#FFFFFF”; </p>
+<p>9 marginTop 上边距 chart.marginTop =100; </p>
+<p>10 marginLeft 左边距 chart.marginLeft =50; </p>
+<p>11 marginRight 右边距 chart.marginRight =30; </p>
+<p>12 addGraph(graph) 添加一个图形，可以添加多个，想要绘制图形，必须有此方法 </p>
+<p>chart.addGraph(graph1); </p>
+<p>13 validateNow(div) 当数据改变时或者属性改变时，想要重新绘图，可以调用该方法chart.validateNow(‘chartdiv’); </p>
+<p>14 chart.write(‘chartdiv’);将amcharts对象写到一个div中，最常用方法chart.chart.write(‘chartdiv’);</p>
+<p> 15addListener(‘dataUp dated’, zoomChart); </p>
+<p>添加一个监听函数，第一个参数是指定事件，第二个是调用的函数名’, </p>
+<p><strong>对象获取方法/常用属性值</strong></p>
+<p>chart.addListener(‘zoomed’, handleZoom);</p>
+<p>示例：</p>
+<p>chart.addListener(‘dataUpdated’, zoomChart);</p>
+<p> 16 rotate图像是否xy轴互换，默认为false，如果想False，让图像顺时针旋转90?，则设置为true </p>
+<p>true chart.rotate = false; </p>
+<p>17 depth3D 设置为3d图像的厚度值 chart.depth3D = 5018 angle 角度，当设置图像为3d图时使用该属性， chart.angle = 40 </p>
+<p>默认为0 </p>
+<p>19 startDuration chart.startDuration = 2 20plotAreaBorderColor 绘图区域边框颜色 </p>
+<p>chart.plotAreaBorderColor </p>
+<p>= “#000000”; </p>
+<p>21 plotAreaBorderAlpha 绘图区域边框透明度chart.plotAreaBorderAlpha </p>
+<p>= 5; </p>
+<p>22 backgroundImage 设置背景图片的地址 </p>
+<p>chart.backgroundImage = “amcharts/images/bg.jpg”;</p>
+<p>23 addChartScrollbar(chartScrollbar) 添加滚动条，只能添加一个           chart.addChartScrollbar(chartScrollbar); </p>
+<p>24 addLegend(legend) 添加图例，可以添加多个chart.addLegend(legend); </p>
+<p>25 addValueAxis(valueAxis1) 添加Y轴。可以添加多个  chart.addValueAxis(valueAxis1);</p>
+<p>26 addChartCursor(chartCursor)添加鼠标形状 </p>
+<p>chart.addChartCursor(chartCursor); </p>
+<p>8、 ChartCursor(光标) </p>
+<p>序号 属性名/方法名 作用 对象获取方法/常用属性值 示例 </p>
+<p>1 chartCursor 对象设置光标的形状和样式 var chartCursor =new </p>
+<p>AmCharts.ChartCursor(); </p>
+<p>2 zoomable 是否可以缩放，设为true的时候，按住鼠标左键划线可以方法图像True/false </p>
+<p>chartCursor.zoomable = false; </p>
+<p>3 cursorAlpha 光标透明度 </p>
+<p>chartCursor.cursorAlpha = 0; </p>
+<p>4 cursorPosition 光标位置</p>
+<p> chartCursor.cursorPosition =”mouse”; </p>
+<p>5 pan 默认为false，设置为true时，光标变为四个向外的箭头形状，按住左键滑动鼠标可以将图像向左移动向右移动 </p>
+<p> chartCursor.pan = true; </p>
+<p>6 categoryBalloonDateFormat设置光标节点显示的日期格式 </p>
+<p>chartCursor.categoryBalloonDateFormat =”JJ:NN, DD MMMM”; </p>
+<p>9、 动态图表示例 </p>
+<p>1、需要在html页面增加一个div，同时设置div的id和样式，amcharts将图表显示在指定的id的div中 </p>
+<div id="chartdiv" style="width: 50%; height: 300px"></div> 
+
+<p>2、引用amcharts js 库和css样式 </p>
+<script src="amcharts/amcharts.js" type="text/javascript"></script> 
+
+<link rel="stylesheet" href="style.css" type="text/css"> 
+
+<p>3、设定一个定时器，循环调用函数 </p>
+<p>window.setInterval(show,2000);//每隔2秒调用一次show()方法，show方法完成绘图功能 </p>
+<p>function show(){ </p>
+<p>var chart = new AmCharts.AmSerialChart(); </p>
+<p>var valueAxis1 = new AmCharts.ValueAxis(); </p>
+<p>var graph1 = new AmCharts.AmGraph(); </p>
+<p>var categoryAxis = chart.categoryAxis; </p>
+<p>var guide = new AmCharts.Guide(); </p>
+<p>var legend = new AmCharts.AmLegend(); </p>
+<p>var chartCursor = new AmCharts.ChartCursor(); </p>
+<p>//设定最大显示数值个数 </p>
+<p>generateChartData(); </p>
+<p>chart.pathToImages =”amcharts/images/“; </p>
+<p>chart.zoomOutButton = { </p>
+<p>backgroundColor: ‘#000000’, </p>
+<p>backgroundAlpha: 0.15 </p>
+<p>}; </p>
+<p>chart.dataProvider = chartData; </p>
+<p>chart.categoryField = “date”; </p>
+<p>categoryAxis.parseDates = false; // as our datais date-based, we set parseDates to true </p>
+<p>categoryAxis.dashLength = 1; </p>
+<p>categoryAxis.gridAlpha = 0.15; </p>
+<p>categoryAxis.axisColor = “#DADADA”; </p>
+<p>// categoryAxis.position = “top”; </p>
+<p>categoryAxis.gridPosition = “start”; </p>
+<p>categoryAxis.startOnAxis = true; </p>
+<p>categoryAxis.gridColor = “#FFFFFF”; </p>
+<p>// CURSOR </p>
+<p>chartCursor.zoomable = false; // as the chartdisplayes not too many values, we disabled zooming </p>
+<p>chartCursor.cursorAlpha = 0; </p>
+<p>chartCursor.cursorPosition = “mouse”; </p>
+<p>chartCursor.pan = true; // set it to fals if youwant the cursor to work in “select” mode </p>
+<p>chart.addChartCursor(chartCursor); </p>
+<p>valueAxis1.axisColor = “#FF6600”; </p>
+<p>valueAxis1.axisThickness = 1; </p>
+<p>valueAxis1.gridAlpha = 0; </p>
+<p>valueAxis1.tickLength =0; </p>
+<p>valueAxis1.minimum = -100; </p>
+<p>valueAxis1.maximum = 100; </p>
+<p>valueAxis1.title=”哈哈”; </p>
+<p>valueAxis1.logarithmic = false; // this linemakes axis logarithmic </p>
+<p>valueAxis1.integersOnly = true; </p>
+<p>valueAxis1.gridCount = 10; </p>
+<p>valueAxis1.unit = “%”; </p>
+<p>valueAxis1.labelsEnabled = true; </p>
+<p>valueAxis1.inside = true; </p>
+<p>valueAxis1.position = “left”; </p>
+<p>chart.addValueAxis(valueAxis1); </p>
+<p>// LEGEND </p>
+<p>legend.align = “center”; </p>
+<p>legend.marginLeft = 0; </p>
+<p>legend.title=”测试”; </p>
+<p>legend.horizontalGap = 10; </p>
+<p>legend.equalWidths = false; </p>
+<p>legend.valueWidth = 120; </p>
+<p>chart.addLegend(legend); </p>
+<p>guide.fillAlpha = 0.1; </p>
+<p>guide.lineAlpha = 0; </p>
+<p>guide.value = 50; </p>
+<p>guide.toValue = 0; </p>
+<p>guide.lineColor = “#CC0000”; </p>
+<p>guide.dashLength = 4; </p>
+<p>guide.label = “平均值”; </p>
+<p>guide.inside = true; </p>
+<p>guide.lineAlpha = 1; </p>
+<p>var guide1 = new AmCharts.Guide(); </p>
+<p>guide1.lineColor = “#CC0000”; </p>
+<p>guide1.lineAlpha = 1; </p>
+<p>guide1.dashLength = 2; </p>
+<p>guide1.inside = true; </p>
+<p>guide1.labelRotation = 90; </p>
+<p>categoryAxis.addGuide(guide1); </p>
+<p>valueAxis1.addGuide(guide); </p>
+<p>graph1.valueAxis = valueAxis1; // we have toindicate which value axis should be used </p>
+<p>graph1.title = “红色”; </p>
+<p>graph1.valueField = “visits”; </p>
+<p>graph1.bullet = “round”; </p>
+<p>graph1.dashLength = 0; </p>
+<p>graph1.hideBulletsCount = 10; </p>
+<p>graph1.balloonText = “<a href="[[visits]]">[date]</a>“; </p>
+<p>graph1.lineColor = “#d1655d”; </p>
+<p>graph1.connect = false; </p>
+<p>graph1.negativeLineColor = “#efcc26”; </p>
+<p>graph1.bulletBorderColor = “#FFFFFF”; </p>
+<p>graph1.bulletBorderThickness = 2; </p>
+<p>graph1.type = “smoothedLine”; // thisline makes the graph smoothed line. </p>
+<p>graph1.fillAlphas = 0.3; // setting fillAlphasto &gt; 0 value makes it area graph </p>
+<p>chart.addGraph(graph1); </p>
+<p>chart.addTitle(“测试动态报表图”, 5); </p>
+<p>chart.plotAreaBorderColor = “#000000”;</p>
+<p>chart.plotAreaBorderAlpha = 5; </p>
+<p>chart.autoMargins = true; </p>
+<p>chart.fontSize = 14; </p>
+<p>chart.write(‘chartdiv’); </p>
+<p>chart=null; </p>
+<p>valueAxis1 = null; </p>
+<p>graph1 = null; </p>
+<p>categoryAxis = null; </p>
+<p>guide = null; </p>
+<p>legend = null; </p>
+<p>} </p>
+<p>function generateChartData() { </p>
+<p>$.ajax({ </p>
+<p>type : “get”, </p>
+<p>url :”${pageContext.request.contextPath}/getData”, </p>
+<p>dataType : “text”, </p>
+<p>data : { </p>
+<p>}, </p>
+<p>success : function(result) { </p>
+<p>parseData(result,20); </p>
+<p>}, </p>
+<p>error : function(XMLHttpRequest, textStatus,errorThrown) { </p>
+<p>alert(“请求异常，请检查服务器是否正常运行～” + XMLHttpRequest.status + “ “ </p>
+<p>+ XMLHttpRequest.readyState + “ “ +textStatus); </p>
+<p>} </p>
+<p>}); </p>
+<p>} </p>
+<p>function parseData(data,num){ </p>
+<p>var tempDate = []; </p>
+<p>tempDate = data.split(“ “); </p>
+<p>chartData.push({ </p>
+<p>date:tempDate[0], </p>
+<p>visits:tempDate[1] </p>
+<p>}); </p>
+<p>var newChartData=[]; </p>
+<p>var len=chartData.length; </p>
+<p>if(len&gt;num){ </p>
+<p>for(var m=0;m&lt;num;m++){ </p>
+<p>newChartData[m]=chartData[len-num+m]; </p>
+<p>} </p>
+<p>chartData = newChartData; </p>
+<p>newChartData=null; </p>
+<p>} </p>
+<p>len=null; </p>
+<p>visits=null; </p>
+<p>} </p>
+<p>4、写一个servlet程序，给amcharts提供动态数据 public class DataProviderServlet extends HttpServlet{ </p>
+<p>private static final long serialVersionUID = 1L;</p>
+<p>public static Integer i=0; </p>
+<p>public DataProviderServlet() { </p>
+<p>super(); </p>
+<p>} </p>
+<p>protected void doGet(HttpServletRequest request,HttpServletResponse response) throws ServletException, </p>
+<p>IOException { </p>
+<p>StringBuilder sb = new StringBuilder(); </p>
+<p>sb.append(i++).append(“ “).append(newRandom().nextInt(100)*(i%2==0?(-1):(1))); </p>
+<p>System.out.println(sb.toString()); </p>
+<p>response.getWriter().write(sb.toString()); </p>
+<p>} </p>
+<p>protected void doPost(HttpServletRequestrequest, HttpServletResponse response) throws ServletException, IOException { </p>
+<p>doGet(request, response); </p>
+<p>} </p>
+<p>} </p>
+<p>5、效果截图 </p>
+<p><img src="file:///C:/Users/hgy/AppData/Local/Temp/msohtmlclip1/01/clip_image001.jpg" alt></p>
+
+    </article>
+    <!-- license  -->
+    
+        <div class="license-wrapper">
+            <p>原文作者：<a href="http://hugenye.github.io">Hugenye</a>
+            <p>原文链接：<a href="http://hugenye.github.io/2019/09/24/amcharts/">http://hugenye.github.io/2019/09/24/amcharts/</a>
+            <p>发表日期：<a href="http://hugenye.github.io/2019/09/24/amcharts/">September 24th 2019, 9:13:21 am</a>
+            <p>更新日期：<a href="http://hugenye.github.io/2019/09/24/amcharts/">September 24th 2019, 7:57:28 pm</a>
+            <p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
+    
+    <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href= "/2019/09/24/python/" title= "Python学习">
+                    <div class="nextTitle">Python学习</div>
+                </a>
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2019/09/24/old-work/" title= "以前工作内容（搬运网易云笔记）">
+                    <div class="prevTitle">以前工作内容（搬运网易云笔记）</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    
+    <!-- gitalk评论 -->
+
+    <div id="comment-container"></div>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.6.0/dist/gitalk.css">
+    <script src="https://cdn.jsdelivr.net/npm/gitalk@1.6.0/dist/gitalk.min.js"></script>
+    <script>
+        var gitalk = new Gitalk({
+            clientID: 'dd4d482de44bbb5a7d23',
+            clientSecret: '828fb384ba22a63e8e008c2677ccc86bd8db3e60',
+            id: 'Tue Sep 24 2019 09:13:21 GMT+0800',
+            repo: 'gitalk',
+            owner: 'hugenye',
+            admin: "hugenye",
+            createIssueManually: true,
+            distractionFreeMode: false
+        })
+        gitalk.render('comment-container')
+    </script>
+    
+    <!-- utteranc评论 -->
+
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
+    
+    
+
+    <!-- 评论 -->
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:hugenye66@163.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/Hugenye" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+            
+                <span class="iconfont-archer wechat" title=wechat>
+                  
+                  <img class="profile-qr" src="/assets/weixin.jpg" />
+                </span>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+    <div class="busuanzi-container">
+    
+     
+    <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+    
+    </div>
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#初步了解"><span class="toc-number">1.</span> <span class="toc-text">初步了解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#折线图画法"><span class="toc-number">2.</span> <span class="toc-text">折线图画法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#柱状图画法"><span class="toc-number">3.</span> <span class="toc-text">柱状图画法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#amcharts图表使用大全："><span class="toc-number">4.</span> <span class="toc-text">amcharts图表使用大全：</span></a></li></ol>
+    </div>
+    
+    <div class="back-top iconfont-archer">&#xe639;</div>
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-panel-archives">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 11
+        </div>
+        <!-- search  -->
+        
+            <div class="site-search popup-trigger">
+                <span class="iconfont-archer search-icon">&#xe627;</span>
+            </div>
+        
+    </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2020 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/18</span><a class="archive-post-title" href= "/2020/07/18/jdk8/" >JDK8新特性</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/13</span><a class="archive-post-title" href= "/2020/03/13/auto/" >自动化测试学习</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2019 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/10</span><a class="archive-post-title" href= "/2019/12/10/http/" >http</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/29</span><a class="archive-post-title" href= "/2019/09/29/exercises/" >网上习题</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/24</span><a class="archive-post-title" href= "/2019/09/24/python/" >Python学习</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/24</span><a class="archive-post-title" href= "/2019/09/24/amcharts/" >amCharts图表插件学习</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/24</span><a class="archive-post-title" href= "/2019/09/24/old-work/" >以前工作内容（搬运网易云笔记）</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/22</span><a class="archive-post-title" href= "/2019/09/22/interview/" >面试题</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2018 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/13</span><a class="archive-post-title" href= "/2018/07/13/bootstrap/" >Bootstrap</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/16</span><a class="archive-post-title" href= "/2018/06/16/aliba/" >企业部署阿里云服务器(Windows)</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2017 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/15</span><a class="archive-post-title" href= "/2017/07/15/base/" >JavaSE基础知识梳理</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name" data-tags="阿里云服务器部署"><span class="iconfont-archer">&#xe606;</span>阿里云服务器部署</span>
+    
+        <span class="sidebar-tag-name" data-tags="JavaSE"><span class="iconfont-archer">&#xe606;</span>JavaSE</span>
+    
+        <span class="sidebar-tag-name" data-tags="python"><span class="iconfont-archer">&#xe606;</span>python</span>
+    
+        <span class="sidebar-tag-name" data-tags="JDK8新特性"><span class="iconfont-archer">&#xe606;</span>JDK8新特性</span>
+    
+        <span class="sidebar-tag-name" data-tags="面试题"><span class="iconfont-archer">&#xe606;</span>面试题</span>
+    
+        <span class="sidebar-tag-name" data-tags="http"><span class="iconfont-archer">&#xe606;</span>http</span>
+    
+        <span class="sidebar-tag-name" data-tags="工作"><span class="iconfont-archer">&#xe606;</span>工作</span>
+    
+        <span class="sidebar-tag-name" data-tags="Bootstrap"><span class="iconfont-archer">&#xe606;</span>Bootstrap</span>
+    
+        <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
+    
+        <span class="sidebar-tag-name" data-tags="面试"><span class="iconfont-archer">&#xe606;</span>面试</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: true
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+        <span class="sidebar-category-name" data-categories="JAVA"><span class="iconfont-archer">&#xe60a;</span>JAVA</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var siteMeta = {
+        root: "/",
+        author: "Hugenye"
+    }
+</script>
+    <!-- CDN failover -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ === 'undefined')
+        {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js">\x3C/script>')
+        }
+    </script>
+    <script src="/scripts/main.js"></script>
+    <!-- algolia -->
+    
+        <div class="site-search">
+  <div class="algolia-popup popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="iconfont-archer">&#xe609;</i>
+    </span>
+  </div>
+</div>
+        <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.8.0/dist/instantsearch.min.js" defer></script>
+        <script src="/scripts/search.js" defer></script>
+    
+    <!-- busuanzi  -->
+    
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- CNZZ  -->
+    
+    </div>
+    <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
+     
+    </body>
+</html>
+
+

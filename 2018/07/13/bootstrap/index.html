@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <!-- title -->
+
+
+
+
+<!-- keywords -->
+
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="author" content="Hugenye">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="Hugenye">
+    
+    <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
+    
+    <meta name="description" content>
+    <meta name="description" content="1.Bootstrap是什么？​    一个用于快u开发web应用程序和网站的前端框架。Bootstrap是基于HTML、CSS、JAVASCRIPT 。 ​    给我使用的感觉是对于掌握一般的前端知识就可以学会怎么去使用Bootstrap，它包含了功能强大的内置组件，易于定制，最重要的是它是开源的。    工作中用到是Bootstrap3，学习在线文档https://v3.bootcss.co">
+<meta name="keywords" content="Bootstrap">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Bootstrap">
+<meta property="og:url" content="http://hugenye.github.io/2018/07/13/bootstrap/index.html">
+<meta property="og:site_name" content="Hugenye个人博客">
+<meta property="og:description" content="1.Bootstrap是什么？​    一个用于快u开发web应用程序和网站的前端框架。Bootstrap是基于HTML、CSS、JAVASCRIPT 。 ​    给我使用的感觉是对于掌握一般的前端知识就可以学会怎么去使用Bootstrap，它包含了功能强大的内置组件，易于定制，最重要的是它是开源的。    工作中用到是Bootstrap3，学习在线文档https://v3.bootcss.co">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-07-14T14:06:23.909Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Bootstrap">
+<meta name="twitter:description" content="1.Bootstrap是什么？​    一个用于快u开发web应用程序和网站的前端框架。Bootstrap是基于HTML、CSS、JAVASCRIPT 。 ​    给我使用的感觉是对于掌握一般的前端知识就可以学会怎么去使用Bootstrap，它包含了功能强大的内置组件，易于定制，最重要的是它是开源的。    工作中用到是Bootstrap3，学习在线文档https://v3.bootcss.co">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <link rel="alternate" href="/atom.xml" title="Hugenye的个人博客" type="application/atom+xml">
+    
+    <title>Bootstrap · hugenye&#39;s Studio</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+</style>
+
+    <link rel="preload" href="/css/style.css?v=20180824" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="stylesheet" href="/css/mobile.css?v=20180824" media="(max-width: 980px)">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+(function( w ){
+	"use strict";
+	// rel=preload support test
+	if( !w.loadCSS ){
+		w.loadCSS = function(){};
+	}
+	// define on the loadCSS obj
+	var rp = loadCSS.relpreload = {};
+	// rel=preload feature support test
+	// runs once and returns a function for compat purposes
+	rp.support = (function(){
+		var ret;
+		try {
+			ret = w.document.createElement( "link" ).relList.supports( "preload" );
+		} catch (e) {
+			ret = false;
+		}
+		return function(){
+			return ret;
+		};
+	})();
+
+	// if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+	// then change that media back to its intended value on load
+	rp.bindMediaToggle = function( link ){
+		// remember existing media attr for ultimate state, or default to 'all'
+		var finalMedia = link.media || "all";
+
+		function enableStylesheet(){
+			link.media = finalMedia;
+		}
+
+		// bind load handlers to enable media
+		if( link.addEventListener ){
+			link.addEventListener( "load", enableStylesheet );
+		} else if( link.attachEvent ){
+			link.attachEvent( "onload", enableStylesheet );
+		}
+
+		// Set rel and non-applicable media type to start an async request
+		// note: timeout allows this to happen async to let rendering continue in IE
+		setTimeout(function(){
+			link.rel = "stylesheet";
+			link.media = "only x";
+		});
+		// also enable media after 3 seconds,
+		// which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+		setTimeout( enableStylesheet, 3000 );
+	};
+
+	// loop through link elements in DOM
+	rp.poly = function(){
+		// double check this to prevent external calls from running
+		if( rp.support() ){
+			return;
+		}
+		var links = w.document.getElementsByTagName( "link" );
+		for( var i = 0; i < links.length; i++ ){
+			var link = links[ i ];
+			// qualify links to those with rel=preload and as=style attrs
+			if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+				// prevent rerunning on link
+				link.setAttribute( "data-loadcss", true );
+				// bind listeners to toggle media back
+				rp.bindMediaToggle( link );
+			}
+		}
+	};
+
+	// if unsupported, run the polyfill
+	if( !rp.support() ){
+		// run once at least
+		rp.poly();
+
+		// rerun poly on an interval until onload
+		var run = w.setInterval( rp.poly, 500 );
+		if( w.addEventListener ){
+			w.addEventListener( "load", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		} else if( w.attachEvent ){
+			w.attachEvent( "onload", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		}
+	}
+
+
+	// commonjs
+	if( typeof exports !== "undefined" ){
+		exports.loadCSS = loadCSS;
+	}
+	else {
+		w.loadCSS = loadCSS;
+	}
+}( typeof global !== "undefined" ? global : this ) );
+</script>
+
+    <link rel="icon" href="/assets/hgy.ico">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js" as="script">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" as="script">
+    <link rel="preload" href="/scripts/main.js" as="script">
+    <link rel="preload" as="font" href="/font/Oswald-Regular.ttf" crossorigin>
+    <link rel="preload" as="font" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" crossorigin>
+    
+    <!-- fancybox -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+</head>
+
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="read-progress"></div>
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >Hugenye的个人博客</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">Bootstrap</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href=/>Hugenye的个人博客</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro" style="
+
+
+
+
+
+
+
+height:50vh;
+">
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            Bootstrap
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Bootstrap">Bootstrap</a>
+    
+</div>
+                
+                
+                    <div class="post-intro-read">
+                        <span>字数统计: <span class="post-count word-count">2k</span>阅读时长: <span class="post-count reading-time">8 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2018/07/13</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+        <script>
+ 
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded');
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in');
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
+
+  function asyncErr(){
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (cb) { o.addEventListener('load', function (e) { cb(null, e); }, false); }
+    if (err) { o.addEventListener('error', function (e) { err(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+
+  var asyncLoadWithFallBack = function(arr, success, reject) {
+      var currReject = function(){
+        reject()
+        arr.shift()
+        if(arr.length)
+          async(arr[0], success, currReject)
+        }
+
+      async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack([
+    "https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", 
+    "https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js",
+    "/lib/webfontloader.min.js"
+  ], asyncCb, asyncErr)
+</script>        
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <h4 id="1-Bootstrap是什么？"><a href="#1-Bootstrap是什么？" class="headerlink" title="1.Bootstrap是什么？"></a>1.Bootstrap是什么？</h4><p>​    一个用于快u开发web应用程序和网站的前端框架。Bootstrap是基于HTML、CSS、JAVASCRIPT 。</p>
+<p>​    给我使用的感觉是对于掌握一般的前端知识就可以学会怎么去使用Bootstrap，它包含了功能强大的内置组件，易于定制，最重要的是它是开源的。</p>
+<p>   工作中用到是Bootstrap3，学习在线文档<a href="https://v3.bootcss.com/" target="_blank" rel="noopener">https://v3.bootcss.com/</a></p>
+<h4 id="2-如何使用"><a href="#2-如何使用" class="headerlink" title="2.如何使用"></a>2.如何使用</h4><p>可以选择在官网下载该文件包，或者使用在线工具库，但是要注意，在线的地址有可能会失效，有一次布局没了觉得很奇怪，查看页面代码发现我继承别人代码全部使用在线的工具库，瞬间心凉凉。为了保险起见还是自己下载个安心些。</p>
+<p><em>注意:</em> Bootstrap插件全部依赖jQuery，必须在Bootstrap之前引入。</p>
+<h4 id="3-如何使用它来布局"><a href="#3-如何使用它来布局" class="headerlink" title="3.如何使用它来布局"></a>3.如何使用它来布局</h4><p>作为一个前端不是特别好的开发，我用了Bootstrap可视化布局，个人感觉还不错。组件只要拖拽自己想要的样子就可以。<a href="https://www.runoob.com/try/bootstrap/layoutit/" target="_blank" rel="noopener">https://www.runoob.com/try/bootstrap/layoutit/</a></p>
+<p>通过定义容器的大小，平分为12份（也有24份，23份的，取12份是一打，表示进阶完美的意思），再调整内外边距，最后结合媒体查询，制作出了强大的响应式网格系统。(可以通过重新编译LESS码源来修改12这个数值)。</p>
+<p>1.数据行(.row)必须包含在容器(.container)中，以便赋予合适的对其方式和内边距(padding)。</p>
+<p>2.在行(.row)中可以添加列(.column)，但列数之和不能超过平分的总列数，比如：12.</p>
+<p>3.通过设置内边距(padding)从而创建列于列之间的间距。然后通过为第一列和最后一列设置负值的外距(margin)来抵消内距(padding)的影响。</p>
+<p>4.不希望相邻的两个列紧靠近在一起，就用offset功能来实现。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"zh-CN"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"IE=edge"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Bootstrap Template<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- Bootstrap --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">"https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- HTML5 shim 和 Respond.js 是为了让 IE8 支持 HTML5 元素和媒体查询（media queries）功能 --&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 警告：通过 file:// 协议（就是直接将 html 页面拖拽到浏览器中）访问页面时 Respond.js 不起作用 --&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--[if lt IE 9]&gt;</span></span><br><span class="line"><span class="comment">      &lt;script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"&gt;&lt;/script&gt;</span></span><br><span class="line"><span class="comment">      &lt;script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"&gt;&lt;/script&gt;</span></span><br><span class="line"><span class="comment">    &lt;![endif]--&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"row clearfix"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"col-md-12 column"</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">h3</span>&gt;</span></span><br><span class="line">                    h3. 这是一套可视化布局系统.</span><br><span class="line">                <span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="4-多种插件的应用"><a href="#4-多种插件的应用" class="headerlink" title="4.多种插件的应用"></a>4.多种插件的应用</h4><h5 id="4-1-Bootstrap-treeView-树形菜单的实际操作总结"><a href="#4-1-Bootstrap-treeView-树形菜单的实际操作总结" class="headerlink" title="4.1 Bootstrap-treeView 树形菜单的实际操作总结"></a>4.1 Bootstrap-treeView 树形菜单的实际操作总结</h5><p>1、资源引用</p>
+<p><code>&lt;``script</code> <code>src=&quot;bootstrap-treeview.js&quot;&gt;</code>script``&gt;`</p>
+<p>2、在一个dom元素绑定该组件</p>
+<p><code>&lt;``div</code> <code>id=&quot;treeview1&quot;&gt;</code>div<code>&gt;&lt;</code>br``&gt;`</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'#treeview1'</span>).treeview(&#123;</span><br><span class="line">data: getTree(), <span class="comment">// 获取数据节点</span></span><br><span class="line">levels: <span class="number">5</span>,<span class="comment">//节点层级数</span></span><br><span class="line">color: <span class="string">"#000"</span>,<span class="comment">//每一级通用的 节点字体颜色</span></span><br><span class="line">backColor: <span class="string">"#fff"</span>,<span class="comment">//每一级通用的 节点字背景色</span></span><br><span class="line">onhoverColor: <span class="string">"orange"</span>,<span class="comment">//选中浮动颜色</span></span><br><span class="line">borderColor: <span class="string">"red"</span>,<span class="comment">//设置组件的边框颜色; 设置showBorder为false，如果你不想要一个可见的边框</span></span><br><span class="line">showBorder: <span class="literal">false</span>,</span><br><span class="line">showTags: <span class="literal">true</span>,<span class="comment">//是否在每个节点的右侧显示标签。 其值必须在每个节点的数据结构中提供</span></span><br><span class="line"></span><br><span class="line">highlightSelected: <span class="literal">true</span>,<span class="comment">//是否突出显示选定的节点</span></span><br><span class="line">selectedColor: <span class="string">"#fff"</span>,<span class="comment">//设置选定节点的前景色</span></span><br><span class="line">selectedBackColor: <span class="string">"darkorange"</span>,<span class="comment">//设置选定节点的背景色</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>代码截取</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">**初始化数据</span><br><span class="line">$(<span class="string">'#treeview1'</span>).treeview(<span class="string">'collapseAll'</span>, &#123;  </span><br><span class="line">  data : treedata, </span><br><span class="line">  silent : <span class="literal">false</span><span class="comment">//设置初始化节点关闭    </span></span><br><span class="line">  &#125;);</span><br><span class="line"> **清空搜索选项**</span><br><span class="line"> $(<span class="string">'#treeview1'</span>).treeview(<span class="string">'clearSearch'</span>);</span><br><span class="line"> **查询功能</span><br><span class="line"> <span class="keyword">var</span> search = <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> result;	</span><br><span class="line">		<span class="comment">// 获取要搜索的信息</span></span><br><span class="line">		<span class="keyword">var</span> pattern = $.trim($(<span class="string">'#input-search'</span>).val());  	</span><br><span class="line">		<span class="built_in">console</span>.log(pattern)</span><br><span class="line">		<span class="comment">/*var len=0;</span></span><br><span class="line"><span class="comment">		for (var i = 0; i &lt; pattern.length; i++) &#123;</span></span><br><span class="line"><span class="comment">			if (pattern[i].match(/[^\x00-\xff]/ig) != null) //全角 </span></span><br><span class="line"><span class="comment">				len += 2; //如果是全角，占用两个字节</span></span><br><span class="line"><span class="comment">			else</span></span><br><span class="line"><span class="comment">				len += 1; //半角占用一个字节</span></span><br><span class="line"><span class="comment">		&#125;*/</span></span><br><span class="line">		<span class="keyword">var</span> reg=<span class="regexp">/^[1-9]\d*$|^0$/</span>;</span><br><span class="line">		<span class="keyword">if</span>(reg.test(pattern))&#123;</span><br><span class="line">			<span class="built_in">window</span>.alert(<span class="string">"搜索内容不可以为纯数字"</span>);</span><br><span class="line">			$(<span class="string">'#input-search'</span>).val(<span class="string">""</span>);</span><br><span class="line">			clear();</span><br><span class="line">		&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">			<span class="keyword">var</span> options = &#123;      </span><br><span class="line">				ignoreCase: <span class="literal">true</span>,      <span class="comment">//忽略大小写</span></span><br><span class="line">				exactMatch: <span class="literal">false</span>,    <span class="comment">//必须为精确的值</span></span><br><span class="line">				revealResults: <span class="literal">true</span>   <span class="comment">//显示匹配的节点</span></span><br><span class="line">			&#125;; </span><br><span class="line">		</span><br><span class="line">			<span class="keyword">var</span> results = $(<span class="string">'#treeview1'</span>).treeview(<span class="string">'search'</span>, [ pattern, options ]);</span><br><span class="line">			<span class="comment">//var output = '&lt;p&gt;' + results.length + ' 匹配的搜索结果&lt;/p&gt;';  </span></span><br><span class="line">			$.each(results, <span class="function"><span class="keyword">function</span> (<span class="params">index, result</span>) </span>&#123; </span><br><span class="line">				<span class="built_in">console</span>.log(result)</span><br><span class="line">				result.text += <span class="string">'&lt;p&gt;- &lt;span style="color:red;"&gt;'</span> + result.text + <span class="string">'&lt;/span&gt;&lt;/p&gt;'</span>; </span><br><span class="line">				<span class="comment">//console.log(result.text);</span></span><br><span class="line">			&#125;);</span><br><span class="line"></span><br><span class="line">		<span class="comment">//	$('#treediv').html(result.text);</span></span><br><span class="line">			<span class="comment">//	&#125;</span></span><br><span class="line">		&#125;	</span><br><span class="line">	&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>对treeview组件的操作参考：</p>
+<p>bootstrap treeview树形菜单 动态扩展 连数据库 - 愿生命从容 - 博客园<a href="https://www.cnblogs.com/chenhtblog/p/8342534.htmlbootstrap-treeview" target="_blank" rel="noopener">https://www.cnblogs.com/chenhtblog/p/8342534.htmlbootstrap-treeview</a> 扩展addNode方法 动态添加子节点的方法 - CSDN博客<a href="https://blog.csdn.net/qq_25628235/article/details/51719917bootstrap" target="_blank" rel="noopener">https://blog.csdn.net/qq_25628235/article/details/51719917bootstrap</a> treeview 增删改的正确姿势 - CSDN博客<a href="https://blog.csdn.net/hotqin888/article/details/54798737/" target="_blank" rel="noopener">https://blog.csdn.net/hotqin888/article/details/54798737/</a></p>
+<h5 id="4-2-Bootstrap-FileInput文件上传的使用"><a href="#4-2-Bootstrap-FileInput文件上传的使用" class="headerlink" title="4.2 Bootstrap FileInput文件上传的使用"></a>4.2 Bootstrap FileInput文件上传的使用</h5><p>html页面使用该插件上传图片并显示在轮播图中</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"modal-body"</span> <span class="attr">style</span>=<span class="string">"height:80%; overflow-y:scroll;"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">"input-b5"</span> <span class="attr">name</span>=<span class="string">"input-b5"</span> <span class="attr">type</span>=<span class="string">"file"</span> <span class="attr">multiple</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>JavaScript：删除图片必须要配置的两个属性initialPreview和initialPreviewConfig</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">init</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  $(<span class="string">"#input-b5"</span>).fileinput(&#123;</span><br><span class="line">          <span class="string">'theme'</span>: <span class="string">'fa'</span>,</span><br><span class="line">          showCaption:<span class="literal">true</span>,</span><br><span class="line">          showPreview :<span class="literal">true</span>, <span class="comment">//是否显示预览</span></span><br><span class="line">          overwriteInitial: <span class="literal">false</span>,<span class="comment">//不覆盖已存在的图片</span></span><br><span class="line">          validateInitialCount: <span class="literal">true</span>,</span><br><span class="line">          initialPreview:array,---&gt;预览时可以看到</span><br><span class="line">          language: <span class="string">'zh'</span>,</span><br><span class="line">          uploadExtraData:&#123;<span class="attr">pictitle</span>:<span class="built_in">JSON</span>.stringify(jsonstr)&#125;,</span><br><span class="line">          <span class="string">'uploadUrl'</span>: <span class="string">'/FileUpload'</span>,</span><br><span class="line">          uploadAsync: <span class="literal">false</span>,<span class="comment">//同步上传</span></span><br><span class="line">          allowedFileExtensions: [<span class="string">'png'</span>, <span class="string">'jpg'</span>,<span class="string">'gif'</span>],</span><br><span class="line">          hideThumbnailContent:<span class="literal">true</span>,</span><br><span class="line">          layoutTemplates :&#123;</span><br><span class="line">              <span class="comment">//actionDelete:'', //去除上传预览的缩略图中的删除图标</span></span><br><span class="line">              actionUpload:<span class="string">''</span>,<span class="comment">//去除上传预览缩略图中的上传图片；</span></span><br><span class="line">              <span class="comment">//actionZoom:''   //去除上传预览缩略图中的查看详情预览的缩略图标。</span></span><br><span class="line">          &#125;,</span><br><span class="line">          initialPreviewConfig:con,----&gt;预览时可以看到</span><br><span class="line">      &#125;)</span><br><span class="line">&#125;</span><br><span class="line">配置动态数据需要添加一个函数：</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getImg</span>(<span class="params">dat</span>)</span>&#123;<span class="comment">//获取图片信息</span></span><br><span class="line">  ........</span><br><span class="line">	<span class="keyword">return</span> array,con;<span class="comment">//传递配置参数的值</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//设置预览轮播图的界面设置</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">setimg</span>(<span class="params">dat</span>)</span>&#123;</span><br><span class="line">&#125;</span><br><span class="line">删除时添加的两个函数：</span><br><span class="line">$(<span class="string">'#input-b5'</span>).on(<span class="string">'filebeforedelete'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">			$.confirm(&#123;</span><br><span class="line">				title: <span class="string">'警告!'</span>,</span><br><span class="line">				content: <span class="string">'你是否想要删除这个图片?'</span>,</span><br><span class="line">				type: <span class="string">'red'</span>,</span><br><span class="line">				buttons: &#123;   </span><br><span class="line">					确定: &#123;</span><br><span class="line">						btnClass: <span class="string">'btn-primary text-white'</span>,</span><br><span class="line">						keys: [<span class="string">'enter'</span>],</span><br><span class="line">						action: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;			</span><br><span class="line">							  resolve();	</span><br><span class="line">						&#125;</span><br><span class="line">					&#125;,</span><br><span class="line">					取消: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">						$.alert(<span class="string">'图片删除被中止! '</span>);</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;);			</span><br><span class="line">		&#125;);</span><br><span class="line">&#125;)</span><br><span class="line">$(<span class="string">'#input-b5'</span>).on(<span class="string">'filedeleted'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"> event,index ,data,val</span>) </span>&#123;	</span><br><span class="line">	<span class="keyword">if</span>(data.status==<span class="number">200</span>)&#123;<span class="comment">//判断删除成功后要把前端的图片更新一下</span></span><br><span class="line">		<span class="keyword">var</span> picimg=val.picimg;<span class="comment">//获取已经修改过的图片数据信息</span></span><br><span class="line">		<span class="keyword">var</span> a=<span class="built_in">JSON</span>.parse(picimg).arrs.split(<span class="string">"#"</span>);</span><br><span class="line">		<span class="keyword">var</span> b=<span class="string">""</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;a.length;i++)&#123;		</span><br><span class="line">			<span class="keyword">if</span>(a[i]==<span class="built_in">JSON</span>.parse(picimg).obj)&#123;				</span><br><span class="line">				b+=<span class="string">""</span>;</span><br><span class="line">			&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">				b+=a[i]+<span class="string">"#"</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(b==<span class="string">""</span>)&#123;</span><br><span class="line">			<span class="comment">//显示没图片的界面设置</span></span><br><span class="line">		&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">			b=b.substring(<span class="number">0</span>,b.length<span class="number">-1</span>);			</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//重新加载资源数据</span></span><br><span class="line">         setimg(b);</span><br><span class="line">		getImg(b);</span><br><span class="line">		init();</span><br><span class="line">		$(<span class="string">'#myModal'</span>).modal(<span class="string">'hide'</span>);</span><br><span class="line">		$(<span class="string">"#strong"</span>).html(<span class="string">"图片删除成功"</span>);	</span><br><span class="line">		$(<span class="string">'#strong'</span>).removeClass(<span class="string">"hidden"</span>);</span><br><span class="line">		<span class="built_in">window</span>.setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">			$(<span class="string">'#strong'</span>).addClass(<span class="string">"hidden"</span>);</span><br><span class="line">		&#125;, <span class="number">2000</span>);</span><br><span class="line">	&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">		$(<span class="string">"#strong"</span>).html(<span class="string">"图片删除异常"</span>);</span><br><span class="line">		$(<span class="string">'#strong'</span>).removeClass(<span class="string">"hidden"</span>);</span><br><span class="line">		<span class="built_in">window</span>.setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">			$(<span class="string">'#strong'</span>).addClass(<span class="string">"hidden"</span>);</span><br><span class="line">		&#125;, <span class="number">2000</span>);</span><br><span class="line">	&#125;	</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>后端代码</p>
+<p>文件上传代码略，基于公司需求增加了删除图片的功能，在前端js函数获取要删除的图片的信息，在后端添加一个删除图片的对应方法。</p>
+
+    </article>
+    <!-- license  -->
+    
+        <div class="license-wrapper">
+            <p>原文作者：<a href="http://hugenye.github.io">Hugenye</a>
+            <p>原文链接：<a href="http://hugenye.github.io/2018/07/13/bootstrap/">http://hugenye.github.io/2018/07/13/bootstrap/</a>
+            <p>发表日期：<a href="http://hugenye.github.io/2018/07/13/bootstrap/">July 13th 2018, 3:00:48 pm</a>
+            <p>更新日期：<a href="http://hugenye.github.io/2018/07/13/bootstrap/">July 14th 2020, 10:06:23 pm</a>
+            <p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
+    
+    <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href= "/2019/09/22/interview/" title= "面试题">
+                    <div class="nextTitle">面试题</div>
+                </a>
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2018/06/16/aliba/" title= "企业部署阿里云服务器(Windows)">
+                    <div class="prevTitle">企业部署阿里云服务器(Windows)</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    
+    <!-- gitalk评论 -->
+
+    <div id="comment-container"></div>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.6.0/dist/gitalk.css">
+    <script src="https://cdn.jsdelivr.net/npm/gitalk@1.6.0/dist/gitalk.min.js"></script>
+    <script>
+        var gitalk = new Gitalk({
+            clientID: 'dd4d482de44bbb5a7d23',
+            clientSecret: '828fb384ba22a63e8e008c2677ccc86bd8db3e60',
+            id: 'Fri Jul 13 2018 15:00:48 GMT+0800',
+            repo: 'gitalk',
+            owner: 'hugenye',
+            admin: "hugenye",
+            createIssueManually: true,
+            distractionFreeMode: false
+        })
+        gitalk.render('comment-container')
+    </script>
+    
+    <!-- utteranc评论 -->
+
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
+    
+    
+
+    <!-- 评论 -->
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:hugenye66@163.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/Hugenye" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+            
+                <span class="iconfont-archer wechat" title=wechat>
+                  
+                  <img class="profile-qr" src="/assets/weixin.jpg" />
+                </span>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+    <div class="busuanzi-container">
+    
+     
+    <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+    
+    </div>
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-Bootstrap是什么？"><span class="toc-number">1.</span> <span class="toc-text">1.Bootstrap是什么？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-如何使用"><span class="toc-number">2.</span> <span class="toc-text">2.如何使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-如何使用它来布局"><span class="toc-number">3.</span> <span class="toc-text">3.如何使用它来布局</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-多种插件的应用"><span class="toc-number">4.</span> <span class="toc-text">4.多种插件的应用</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#4-1-Bootstrap-treeView-树形菜单的实际操作总结"><span class="toc-number">4.1.</span> <span class="toc-text">4.1 Bootstrap-treeView 树形菜单的实际操作总结</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-2-Bootstrap-FileInput文件上传的使用"><span class="toc-number">4.2.</span> <span class="toc-text">4.2 Bootstrap FileInput文件上传的使用</span></a></li></ol></li></ol>
+    </div>
+    
+    <div class="back-top iconfont-archer">&#xe639;</div>
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-panel-archives">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 11
+        </div>
+        <!-- search  -->
+        
+            <div class="site-search popup-trigger">
+                <span class="iconfont-archer search-icon">&#xe627;</span>
+            </div>
+        
+    </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2020 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/18</span><a class="archive-post-title" href= "/2020/07/18/jdk8/" >JDK8新特性</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/13</span><a class="archive-post-title" href= "/2020/03/13/auto/" >自动化测试学习</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2019 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/10</span><a class="archive-post-title" href= "/2019/12/10/http/" >http</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/29</span><a class="archive-post-title" href= "/2019/09/29/exercises/" >网上习题</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/24</span><a class="archive-post-title" href= "/2019/09/24/python/" >Python学习</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/24</span><a class="archive-post-title" href= "/2019/09/24/amcharts/" >amCharts图表插件学习</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/24</span><a class="archive-post-title" href= "/2019/09/24/old-work/" >以前工作内容（搬运网易云笔记）</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/22</span><a class="archive-post-title" href= "/2019/09/22/interview/" >面试题</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2018 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/13</span><a class="archive-post-title" href= "/2018/07/13/bootstrap/" >Bootstrap</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/16</span><a class="archive-post-title" href= "/2018/06/16/aliba/" >企业部署阿里云服务器(Windows)</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2017 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/15</span><a class="archive-post-title" href= "/2017/07/15/base/" >JavaSE基础知识梳理</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name" data-tags="阿里云服务器部署"><span class="iconfont-archer">&#xe606;</span>阿里云服务器部署</span>
+    
+        <span class="sidebar-tag-name" data-tags="JavaSE"><span class="iconfont-archer">&#xe606;</span>JavaSE</span>
+    
+        <span class="sidebar-tag-name" data-tags="python"><span class="iconfont-archer">&#xe606;</span>python</span>
+    
+        <span class="sidebar-tag-name" data-tags="JDK8新特性"><span class="iconfont-archer">&#xe606;</span>JDK8新特性</span>
+    
+        <span class="sidebar-tag-name" data-tags="面试题"><span class="iconfont-archer">&#xe606;</span>面试题</span>
+    
+        <span class="sidebar-tag-name" data-tags="http"><span class="iconfont-archer">&#xe606;</span>http</span>
+    
+        <span class="sidebar-tag-name" data-tags="工作"><span class="iconfont-archer">&#xe606;</span>工作</span>
+    
+        <span class="sidebar-tag-name" data-tags="Bootstrap"><span class="iconfont-archer">&#xe606;</span>Bootstrap</span>
+    
+        <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
+    
+        <span class="sidebar-tag-name" data-tags="面试"><span class="iconfont-archer">&#xe606;</span>面试</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: true
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+        <span class="sidebar-category-name" data-categories="JAVA"><span class="iconfont-archer">&#xe60a;</span>JAVA</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var siteMeta = {
+        root: "/",
+        author: "Hugenye"
+    }
+</script>
+    <!-- CDN failover -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ === 'undefined')
+        {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js">\x3C/script>')
+        }
+    </script>
+    <script src="/scripts/main.js"></script>
+    <!-- algolia -->
+    
+        <div class="site-search">
+  <div class="algolia-popup popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="iconfont-archer">&#xe609;</i>
+    </span>
+  </div>
+</div>
+        <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.8.0/dist/instantsearch.min.js" defer></script>
+        <script src="/scripts/search.js" defer></script>
+    
+    <!-- busuanzi  -->
+    
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- CNZZ  -->
+    
+    </div>
+    <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
+     
+    </body>
+</html>
+
+
