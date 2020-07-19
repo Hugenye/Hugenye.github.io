@@ -625,6 +625,23 @@ height:50vh;
 <!-- City版安装代码已完成 -->
     
     
+<div id="container"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+    var gitment = new Gitment({
+        id: 'Tue Sep 24 2019 20:37:52 GMT+0800', // 可选。默认为 location.href
+        owner: 'hugenye',
+        repo: 'https://github.com/Hugenye/Hugenye.github.io.git',
+        oauth: {
+            client_id: 'dd4d482de44bbb5a7d23',
+            client_secret: '828fb384ba22a63e8e008c2677ccc86bd8db3e60',
+        },
+    })
+    gitment.render('container')
+
+</script>
+
     <!-- gitalk评论 -->
 
     <!-- utteranc评论 -->
@@ -853,12 +870,6 @@ top:50vh;
     
     
     
-    
-    
-    
-    
-    
-    
     <div class="total-and-search">
         <div class="total-archive">
         Total : 11
@@ -966,15 +977,15 @@ top:50vh;
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
-        <span class="sidebar-tag-name" data-tags="阿里云服务器部署"><span class="iconfont-archer">&#xe606;</span>阿里云服务器部署</span>
-    
         <span class="sidebar-tag-name" data-tags="JavaSE"><span class="iconfont-archer">&#xe606;</span>JavaSE</span>
+    
+        <span class="sidebar-tag-name" data-tags="阿里云服务器部署"><span class="iconfont-archer">&#xe606;</span>阿里云服务器部署</span>
     
         <span class="sidebar-tag-name" data-tags="python"><span class="iconfont-archer">&#xe606;</span>python</span>
     
-        <span class="sidebar-tag-name" data-tags="面试题"><span class="iconfont-archer">&#xe606;</span>面试题</span>
-    
         <span class="sidebar-tag-name" data-tags="http"><span class="iconfont-archer">&#xe606;</span>http</span>
+    
+        <span class="sidebar-tag-name" data-tags="面试题"><span class="iconfont-archer">&#xe606;</span>面试题</span>
     
         <span class="sidebar-tag-name" data-tags="JDK8新特性"><span class="iconfont-archer">&#xe606;</span>JDK8新特性</span>
     
