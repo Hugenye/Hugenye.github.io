@@ -23,21 +23,21 @@
     <meta name="description" content="我使用的主题hexo-theme-archer 添加github评论功能新建仓库在Github上新建一个仓库 创建OAuth Application Gitalk需要一个Github Application，点击申请https://github.com/settings/applications/new   完成后会生成相应clientId和clientSecret 配置_config.yml12">
 <meta name="keywords" content="Hexo主题配置">
 <meta property="og:type" content="article">
-<meta property="og:title" content="hexo_deploy">
+<meta property="og:title" content="Hexo archer主题配置">
 <meta property="og:url" content="http://hugenye.github.io/2020/07/21/hexo-deploy/index.html">
 <meta property="og:site_name" content="Hugenye个人博客">
 <meta property="og:description" content="我使用的主题hexo-theme-archer 添加github评论功能新建仓库在Github上新建一个仓库 创建OAuth Application Gitalk需要一个Github Application，点击申请https://github.com/settings/applications/new   完成后会生成相应clientId和clientSecret 配置_config.yml12">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-07-21T08:45:47.267Z">
+<meta property="og:updated_time" content="2020-07-21T10:26:24.091Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="hexo_deploy">
+<meta name="twitter:title" content="Hexo archer主题配置">
 <meta name="twitter:description" content="我使用的主题hexo-theme-archer 添加github评论功能新建仓库在Github上新建一个仓库 创建OAuth Application Gitalk需要一个Github Application，点击申请https://github.com/settings/applications/new   完成后会生成相应clientId和clientSecret 配置_config.yml12">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     
     <link rel="alternate" href="/atom.xml" title="Hugenye的个人博客" type="application/atom+xml">
     
-    <title>hexo_deploy · hugenye&#39;s Studio</title>
+    <title>Hexo archer主题配置 · hugenye&#39;s Studio</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -232,7 +232,7 @@
                 <a href="/" >Hugenye的个人博客</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name">hexo_deploy</a>
+                <a href="#" class="post-name">Hexo archer主题配置</a>
             </div>
     </div>
     
@@ -262,7 +262,7 @@ height:50vh;
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            hexo_deploy
+            Hexo archer主题配置
             <!-- 404 -->
             
         </h1>
@@ -287,7 +287,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>字数统计: <span class="post-count word-count">390</span>阅读时长: <span class="post-count reading-time">1 min</span></span>
+                        <span>字数统计: <span class="post-count word-count">852</span>阅读时长: <span class="post-count reading-time">3 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -437,6 +437,25 @@ height:50vh;
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#仓库名  用户名/仓库名</span><br><span class="line">utteranc_repo:  hugenye/gitalk</span><br><span class="line">utteranc_label: utteranc</span><br><span class="line">#主题</span><br><span class="line">utteranc_theme: github-light</span><br><span class="line">#映射配置</span><br><span class="line">utteranc_issue_term: pathname</span><br></pre></td></tr></table></figure>
 
 <p>hexo g &amp;hexo d 配置完成</p>
+<h1 id="博客中插入音乐"><a href="#博客中插入音乐" class="headerlink" title="博客中插入音乐"></a>博客中插入音乐</h1><p>使用Aplayer播放器，需要用到插件</p>
+<p>切换到hexo目录，运行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save hexo-tag-aplayer</span><br></pre></td></tr></table></figure>
+
+<p>安装完成后，在需要添加的音乐的地方加上</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% aplayer &quot;歌曲名称&quot; &quot;作者&quot; &quot;音乐_url&quot; &quot;封面图片_url&quot; &quot;autoplay&quot; %&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意这个在MarkDown文件中插入要看一下这段文字是不是在Paragraph中设置的是Code Fences，要改成普通字段</p>
+<p>举例网易云的音乐外部链接获取，一般获取到的是这个样子<a href="https://music.163.com/#/song?id=21311956" target="_blank" rel="noopener">https://music.163.com/#/song?id=21311956</a>，要把它改成<a href="http://music.163.com/song/media/outer/url?加上之前链接获取的id值+.mp3就是这样" target="_blank" rel="noopener">http://music.163.com/song/media/outer/url?加上之前链接获取的id值+.mp3就是这样</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://music.163.com/song/media/outer/url?id=21311956.mp3</span><br></pre></td></tr></table></figure>
+
+<p>获取图片直接按F12获取图片链接就可以了</p>
+<p>之后</p>
+<p>hexo d –g就可以了</p>
+<p>如果要加入歌单可以这样写</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% aplayerlist %&#125;&#123;&quot;narrow&quot;: false,&quot;autoplay&quot;: true,&quot;showlrc&quot;: 3,&quot;mode&quot;: &quot;random&quot;,&quot;music&quot;: [&#123;&quot;title&quot;: &quot;轮回&quot;,&quot;author&quot;: &quot;杭盖&quot;,&quot;url&quot;: &quot;http://music.163.com/song/media/outer/url?id=31654650.mp3&quot;,&quot;pic&quot;: &quot;http://p1.music.126.net/7LWp6SH2v2rcad5X8rubbg==/1385384662120695.jpg?param=130y130&quot;,&quot;lrc&quot;: &quot;lyric.txt&quot;&#125;,&#123;&quot;title&quot;: &quot;She Is My Sin&quot;,&quot;author&quot;: &quot;nightwish&quot;,&quot;url&quot;: &quot;http://music.163.com/song/media/outer/url?id=4209157.mp3&quot;,&quot;pic&quot;: &quot;http://p1.music.126.net/TK4eehKaatnOgvkUFW8AkQ==/1743825441666319.jpg&quot;,&quot;lrc&quot;:&quot;She Is My Sin.txt&quot;&#125;]&#125;&#123;% endaplayerlist %&#125;</span><br></pre></td></tr></table></figure>
+
+<p>歌词链接的获取需要检查代码，查看歌词对应位置的对应id值是什么然后拼接成字符串：<a href="http://music.163.com/api/song/lyric?id=4209157&amp;lv=1&amp;kv=1&amp;tv=-1，之后打开网页另存为成.txt的文件，存放到hexo的资源目录中。" target="_blank" rel="noopener">http://music.163.com/api/song/lyric?id=4209157&amp;lv=1&amp;kv=1&amp;tv=-1，之后打开网页另存为成.txt的文件，存放到hexo的资源目录中。</a></p>
+<p>示例如我博客里的自我介绍（about）的使用。</p>
 
     </article>
     <!-- license  -->
@@ -445,7 +464,7 @@ height:50vh;
             <p>原文作者：<a href="http://hugenye.github.io">Hugenye</a>
             <p>原文链接：<a href="http://hugenye.github.io/2020/07/21/hexo-deploy/">http://hugenye.github.io/2020/07/21/hexo-deploy/</a>
             <p>发表日期：<a href="http://hugenye.github.io/2020/07/21/hexo-deploy/">July 21st 2020, 3:21:25 pm</a>
-            <p>更新日期：<a href="http://hugenye.github.io/2020/07/21/hexo-deploy/">July 21st 2020, 4:45:47 pm</a>
+            <p>更新日期：<a href="http://hugenye.github.io/2020/07/21/hexo-deploy/">July 21st 2020, 6:26:24 pm</a>
             <p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -594,7 +613,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#添加github评论功能"><span class="toc-number">1.</span> <span class="toc-text">添加github评论功能</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#新建仓库"><span class="toc-number">1.1.</span> <span class="toc-text">新建仓库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置-config-yml"><span class="toc-number">1.2.</span> <span class="toc-text">配置_config.yml</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#添加utterance评论系统"><span class="toc-number">2.</span> <span class="toc-text">添加utterance评论系统</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建Github仓库"><span class="toc-number">2.0.1.</span> <span class="toc-text">创建Github仓库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#授权"><span class="toc-number">2.0.2.</span> <span class="toc-text">授权</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#主题配置"><span class="toc-number">2.0.3.</span> <span class="toc-text">主题配置</span></a></li></ol></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#添加github评论功能"><span class="toc-number">1.</span> <span class="toc-text">添加github评论功能</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#新建仓库"><span class="toc-number">1.1.</span> <span class="toc-text">新建仓库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置-config-yml"><span class="toc-number">1.2.</span> <span class="toc-text">配置_config.yml</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#添加utterance评论系统"><span class="toc-number">2.</span> <span class="toc-text">添加utterance评论系统</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建Github仓库"><span class="toc-number">2.0.1.</span> <span class="toc-text">创建Github仓库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#授权"><span class="toc-number">2.0.2.</span> <span class="toc-text">授权</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#主题配置"><span class="toc-number">2.0.3.</span> <span class="toc-text">主题配置</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#博客中插入音乐"><span class="toc-number">3.</span> <span class="toc-text">博客中插入音乐</span></a></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
@@ -760,7 +779,7 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">07/21</span><a class="archive-post-title" href= "/2020/07/21/hexo-deploy/" >hexo_deploy</a>
+            <span class="archive-post-date">07/21</span><a class="archive-post-title" href= "/2020/07/21/hexo-deploy/" >Hexo archer主题配置</a>
         </li>
     
     
