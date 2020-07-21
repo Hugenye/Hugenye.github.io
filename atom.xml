@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://hugenye.github.io/"/>
-  <updated>2020-07-21T06:34:45.060Z</updated>
+  <updated>2020-07-21T07:40:25.575Z</updated>
   <id>http://hugenye.github.io/</id>
   
   <author>
@@ -17,11 +17,37 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>hexo_deploy</title>
+    <link href="http://hugenye.github.io/2020/07/21/hexo-deploy/"/>
+    <id>http://hugenye.github.io/2020/07/21/hexo-deploy/</id>
+    <published>2020-07-21T07:21:25.000Z</published>
+    <updated>2020-07-21T07:40:25.575Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>我使用的主题<a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank" rel="noopener">hexo-theme-archer</a></p><h1 id="添加github评论功能"><a href="#添加github评论功能" class="headerlink" title="添加github评论功能"></a>添加github评论功能</h1><h2 id="新建仓库"><a href="#新建仓库" class="headerlink" title="新建仓库"></a>新建仓库</h2><p>在Github上新建一个仓库</p><p>创建OAuth Application</p><p>Gitalk需要一个Github Application，点击申请<a href="https://github.com/settings/applications/new" target="_blank" rel="noopener">https://github.com/settings/applications/new</a></p><p>完成后会生成相应clientId和clientSecret</p><h2 id="配置-config-yml"><a href="#配置-config-yml" class="headerlink" title="配置_config.yml"></a>配置_config.yml</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">gitalk_client_id: &apos;clientId&apos;</span><br><span class="line">gitalk_client_secret: &apos;clientSecret&apos;</span><br><span class="line">gitalk_admin: hugenye </span><br><span class="line">gitalk_owner: hugenye</span><br><span class="line">#你要存放的项目名</span><br><span class="line">gitalk_repo: gitalk</span><br><span class="line">#每页多少个评论</span><br><span class="line">gitalk_perPage: 15</span><br><span class="line">#last #排序方式是从旧到新（first）还是从新到旧（last）</span><br><span class="line">gitalk_pagerDirection: last</span><br><span class="line">#如果当前页面没有相应的 isssue ，且登录的用户属于 admin，则会自动创建 issue。如果设置为 true，则显示一个初始化页面，创建 issue 需要点击 init 按钮。</span><br><span class="line">gitalk_createIssueManually: false </span><br><span class="line">#是否启用快捷键(cmd|ctrl + enter) 提交评论.</span><br><span class="line">gitalk_distractionFreeMode: true</span><br></pre></td></tr></table></figure><p>就配置完成了。</p><h1 id="添加utterance评论系统"><a href="#添加utterance评论系统" class="headerlink" title="添加utterance评论系统"></a>添加utterance评论系统</h1><p>配置步骤</p><h3 id="创建Github仓库"><a href="#创建Github仓库" class="headerlink" title="创建Github仓库"></a>创建Github仓库</h3><p>上面提到，utterance使用Github保存评论，那我们就需要创建一个<code>repository</code>专门保存评论。</p><p><code>repository</code>名称可以根据自己喜好取，这个后面会用到。</p><h3 id="授权"><a href="#授权" class="headerlink" title="授权"></a>授权</h3><p>用户在博客页面上输入评论，utterance拿到这个评论后，自动的提交到上面刚创建仓库的Issues里。</p><p>所以我们需要授权utterance应用能访问仓库的Issues。</p><p>点击链接： <a href="https://github.com/apps/utterances" target="_blank" rel="noopener">https://github.com/apps/utterances</a> </p><h3 id="主题配置"><a href="#主题配置" class="headerlink" title="主题配置"></a>主题配置</h3><p>一，在主题的配置文件<code>_config.yml</code>文件中，加入如下配置：</p><p><em>位置可以放到其它评论配置的后面</em></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#仓库名  用户名/仓库名</span><br><span class="line">utteranc_repo:  hugenye/gitalk</span><br><span class="line">utteranc_label: utteranc</span><br><span class="line">#主题</span><br><span class="line">utteranc_theme: github-light</span><br><span class="line">#映射配置</span><br><span class="line">utteranc_issue_term: pathname</span><br></pre></td></tr></table></figure><p>hexo g &amp;hexo d 配置完成</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla
+      
+    
+    </summary>
+    
+    
+      <category term="hexos" scheme="http://hugenye.github.io/categories/hexos/"/>
+    
+    
+      <category term="Hexo主题配置" scheme="http://hugenye.github.io/tags/Hexo%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Hexo速度提升</title>
     <link href="http://hugenye.github.io/2020/07/21/double/"/>
     <id>http://hugenye.github.io/2020/07/21/double/</id>
     <published>2020-07-21T00:40:05.000Z</published>
-    <updated>2020-07-21T06:34:45.060Z</updated>
+    <updated>2020-07-21T08:44:28.476Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="Hexo-双线部署到-Coding-（2020版）和-GitHub-提升访问速度"><a href="#Hexo-双线部署到-Coding-（2020版）和-GitHub-提升访问速度" class="headerlink" title="Hexo 双线部署到 Coding （2020版）和 GitHub 提升访问速度"></a>Hexo 双线部署到 Coding （2020版）和 GitHub 提升访问速度</h1><p>Hex+GitHub搭建的博客，网站访问速度特别的慢，所以选择把博客推送到Coding来提升访问速度。</p><p>由于Coding Pages改版，很多功能找起来和网上看到的功能块的位置不一样，所以觉得还是写一个最新的部署案例。</p><p>部署步骤：</p><h2 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h2><p><a href="https://coding.net/" target="_blank" rel="noopener">Coding Pages网址</a>点击进入后，选择【免费注册】</p><p>进入注册页面，会看到要先创建团队(我的团队，才可以创建用户。</p><img src="/2020/07/21/double/Coding的注册.PNG" title="Coding的注册页面"><p>进入Coding的后台</p><img src="/2020/07/21/double/Coding后台.PNG" title="Coding的用户后台页面"><p>选择【项目】-》【创建项目】</p><img src="/2020/07/21/double/创建项目.PNG" title="创建项目"><p>之后会弹出要你选择项目模板，我选择的是项目托管</p><img src="/2020/07/21/double/选择项目模板.PNG" title="选择项目模板"><p>之后填写项目名称建议和自己的用户名保持一致，可以直接通过 user_name.coding.me （我设置的是hugenye.coding.me访问博客，项目标识是自动填写，之后【完成创建】</p><p>项目就创建好了。</p><h2 id="配置公钥"><a href="#配置公钥" class="headerlink" title="配置公钥"></a>配置公钥</h2><p>参考<a href="https://help.coding.net/docs/project/features/ssh.html?_ga=2.71797075.1386798579.1595219352-1055493866.1595219352" target="_blank" rel="noopener">Coding 配置公钥</a></p><h2 id="配置-config-yml"><a href="#配置-config-yml" class="headerlink" title="配置_config.yml"></a>配置_config.yml</h2><p>进入我们的项目，选择SSH链接，复制链接</p><p>然后打开本地博客根目录的config.yml文件，找到deploy关键字，添加复制的coding地址：</p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line"><span class="attr">  type:</span> <span class="string">git</span></span><br><span class="line"> <span class="comment"># repository: https://github.com/Hugenye/Hugenye.github.io.git</span></span><br><span class="line"> <span class="comment"># branch: master</span></span><br><span class="line"><span class="attr">  repo:</span> </span><br><span class="line">       <span class="comment">#github的ssh链接</span></span><br><span class="line"><span class="attr">       github:</span> <span class="attr">https://github.com/Hugenye/Hugenye.github.io.git,master</span></span><br><span class="line">       <span class="comment">##coding的ssh链接</span></span><br><span class="line"><span class="attr">       coding:</span> <span class="string">git@e.coding.net:hugenye/hugenye.coding.me/hugenye.coding.me.git,master</span></span><br></pre></td></tr></table></figure><h2 id="将代码推送到Coding。"><a href="#将代码推送到Coding。" class="headerlink" title="将代码推送到Coding。"></a>将代码推送到Coding。</h2><p>在博客根目录右击Git Bash Here，输入</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean </span><br><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure><p>代码就会被推送</p><img src="/2020/07/21/double/代码推送.PNG" title="代码被推送到Coding"><h2 id="开启Coding-Pages（深坑）"><a href="#开启Coding-Pages（深坑）" class="headerlink" title="开启Coding Pages（深坑）"></a>开启Coding Pages（深坑）</h2><p>开启静态网站之前要先完成实名认证</p><p>查看之前别人发的微博，根本找不到位置，找了好久才找到</p><p>进入项目，选择左下角的【项目设置】</p><img src="/2020/07/21/double/项目设置.PNG" title="项目设置1"><p>【功能开关】-》打开【持续部署】的开关（不打开静态网站功能不启用）-》返回上一级菜单选择【持续部署】-》【静态网站】</p><img src="/2020/07/21/double/功能开关.PNG" title="项目设置2"><img src="/2020/07/21/double/静态网站.PNG" title="项目设置3"><p>选择【新建】，填写网站名称</p><img src="/2020/07/21/double/新建静态网站.PNG" title="项目设置4"><p>保存后会生成一个随机的网址</p><p>可以选择【立即部署】，域名（xxxx.coding-pages.me）就是免费给我们生成的随机域名（绑定域名需要用到）</p><p>也可以选择自己购买域名绑定域名</p><h2 id="绑定域名并开启Https"><a href="#绑定域名并开启Https" class="headerlink" title="绑定域名并开启Https"></a>绑定域名并开启Https</h2><p>在静态网站一栏的右上角点击【设置】，下滑到底部，绑定我们的域名</p><h3 id="注册域名"><a href="#注册域名" class="headerlink" title="注册域名"></a>注册域名</h3><p>域名有免费的，也有收费的，也不是很贵。</p><p>在腾讯云买了个.xyz的域名，最近有活动，新用户一年1元钱。</p><h3 id="DNSPod域名解析"><a href="#DNSPod域名解析" class="headerlink" title="DNSPod域名解析"></a>DNSPod域名解析</h3><p>域名解析有两种方式：</p><p>1.在域名 DNS 设置中添加一条 CNAME 记录指向 xxxx.coding-pages.me，解析路线选择默认。<br>2.在域名 DNS 设置中添加一条A记录，记录指向 xxxx.coding-pages.me的ip，解析路线选择默认。（ip地址获取：WIN+R输入cmd进入终端，输入：ping xxxx.coding-pages.me 即可。）</p><p>操作方式：（选择第一种方式）</p><p>进入DNSPod的控制台，选择【DNS解析】—》【我的域名】</p><p>添加要解析的域名</p><img src="/2020/07/21/double/添加要域名解析.PNG" title="域名解析"><p>进入要解析的域名【添加记录】，添加一条 CNAME 记录指向Coding产生的xxxx.coding-pages.com的地址，之后选择这条记录有个SSL的开关，选中生成SSL证书，之后都点击开启就可以了。</p><img src="/2020/07/21/double/添加记录.PNG" title="添加记录"><h3 id="开启HTTPS，勾选如图所示："><a href="#开启HTTPS，勾选如图所示：" class="headerlink" title="开启HTTPS，勾选如图所示："></a>开启HTTPS，勾选如图所示：</h3><img src="/2020/07/21/double/HTTPS.PNG" title="HTTPS设置1"><img src="/2020/07/21/double/网址.PNG" title="HTTPS设置2"><p>域名绑定成功</p><img src="/2020/07/21/double/成功.PNG" title="域名绑定成功">]]></content>
     
@@ -35,7 +61,7 @@
     </summary>
     
     
-      <category term="hexos" scheme="http://hugenye.github.io/categories/hexos/"/>
+      <category term="Hexo" scheme="http://hugenye.github.io/categories/Hexo/"/>
     
     
       <category term="Hexo" scheme="http://hugenye.github.io/tags/Hexo/"/>
