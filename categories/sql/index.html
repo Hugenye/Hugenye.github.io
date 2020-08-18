@@ -22,7 +22,7 @@
     <meta name="description" content>
     <meta property="og:type" content="website">
 <meta property="og:title" content="Hugenye个人博客">
-<meta property="og:url" content="http://hugenye.github.io/tags/JavaSE/index.html">
+<meta property="og:url" content="http://hugenye.github.io/categories/sql/index.html">
 <meta property="og:site_name" content="Hugenye个人博客">
 <meta property="og:locale" content="zh-CN">
 <meta name="twitter:card" content="summary">
@@ -356,75 +356,53 @@
     
     
     <article class="index-post">
-        <a class="abstract-title" href = "/2017/07/15/base/" >
+        <a class="abstract-title" href = "/2020/08/16/sqlserver/" >
             
-                <span>JavaSE基础知识梳理</span>
+                <span>sqlserver</span>
         </a>
         <div class="abstract-content">
-            基本数据类型转换：基本数据类型总结
+            数据库指令练习实验**1  数据库的创建与修改**
+
+在查询分析器中创建数据库，名称为Tushuguan1，数据文件的初始大小10Mb，增量2Mb，限制大小50Mb。
+
+1234567create database tushuguan1on primary(name='tushuguan1',filename='c:\shujuku\tushuguan1.mdf',size=10Mb,maxsize=50Mb,filegrowth=2Mb);
 
 
-NO.
-数据类型
-大小/位
-默认值    (全局变量才有)
-可表示的数据范围
-
-
-
-1
-long(长整数)
-64
-0l
--9223373036854775808 ~9223372036854775807
-
-
-2
-int(整数)
-32
-0
--2147483648~2147483647
-
-
-3
-short(短整数)
-16
-(short)0
--32768~32767
-
-
-4
-byte(字节型)
-8
-(byte)0
--128~127
-
-
-5
-char(字符)
-16
-\u0000(空)
-0-65535
-
-
-6
-float(单精度)
-32
-0.0f
--3.4E...
+在查询分析器中，为Tushuguan1增加一个事务日志文件，名称为TushuguanL，文件的初始大小15Mb，增量1 Mb，限制大小30Mb...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
             <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/07/15</span>
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/08/16</span>
             </div>
             <!-- tags  -->
             
-            <div class= abstract-tags >
+        </div>
+    </article>
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = "JavaSE">JavaSE</a>
     
-</div>
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2020/08/16/mysql/" >
+            
+                <span>MySQL数据库</span>
+        </a>
+        <div class="abstract-content">
+            SQL语句的分类：DDL*（Data Definition Language）数据定义语言，用来定义数据库对象：库、表、列等；     CREATE、ALTER、DROP 
+12345678//数据库CREATE DATABASE [IF NOT EXISTS] 数据库名DROP DATABASE [IF EXISTS] 数据库名//数据表create table 数据表(  id INT(11),)
+
+DML*（Data Manipulation Language）：数据操作语言，用来定义数据库记录（数据）；INSERT、 UPDATE、 DELETE
+DQL*（Data Query ...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/08/16</span>
+            </div>
+            <!-- tags  -->
             
         </div>
     </article>
@@ -661,9 +639,61 @@ float(单精度)
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 13
+        Total : 15
         </div>
         <!-- search  -->
         
@@ -680,6 +710,21 @@ float(单精度)
     
     <div class="archive-year"> 2020 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/17</span><a class="archive-post-title" href= "/2020/08/17/html/" >网页三剑客（HTML+CSS+JavaScript）</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/16</span><a class="archive-post-title" href= "/2020/08/16/sqlserver/" >sqlserver</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/16</span><a class="archive-post-title" href= "/2020/08/16/mysql/" >MySQL数据库</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -759,20 +804,6 @@ float(单精度)
             <span class="archive-post-date">06/16</span><a class="archive-post-title" href= "/2018/06/16/aliba/" >企业部署阿里云服务器(Windows)</a>
         </li>
     
-    
-    
-    
-    
-        </ul>
-    
-    <div class="archive-year"> 2017 </div>
-    <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">07/15</span><a class="archive-post-title" href= "/2017/07/15/base/" >JavaSE基础知识梳理</a>
-        </li>
-    
     </div>
   </div>
         <div class="sidebar-panel-tags">
@@ -780,17 +811,15 @@ float(单精度)
     
         <span class="sidebar-tag-name" data-tags="阿里云服务器部署"><span class="iconfont-archer">&#xe606;</span>阿里云服务器部署</span>
     
-        <span class="sidebar-tag-name" data-tags="JavaSE"><span class="iconfont-archer">&#xe606;</span>JavaSE</span>
+        <span class="sidebar-tag-name" data-tags="python"><span class="iconfont-archer">&#xe606;</span>python</span>
     
         <span class="sidebar-tag-name" data-tags="Hexo"><span class="iconfont-archer">&#xe606;</span>Hexo</span>
     
-        <span class="sidebar-tag-name" data-tags="python"><span class="iconfont-archer">&#xe606;</span>python</span>
-    
         <span class="sidebar-tag-name" data-tags="面试题"><span class="iconfont-archer">&#xe606;</span>面试题</span>
     
-        <span class="sidebar-tag-name" data-tags="http"><span class="iconfont-archer">&#xe606;</span>http</span>
-    
         <span class="sidebar-tag-name" data-tags="Hexo主题配置"><span class="iconfont-archer">&#xe606;</span>Hexo主题配置</span>
+    
+        <span class="sidebar-tag-name" data-tags="http"><span class="iconfont-archer">&#xe606;</span>http</span>
     
         <span class="sidebar-tag-name" data-tags="JDK8新特性"><span class="iconfont-archer">&#xe606;</span>JDK8新特性</span>
     
@@ -835,9 +864,11 @@ jsonContent:
         <div class="sidebar-panel-categories">
     <div class="sidebar-categories-name">
     
+        <span class="sidebar-category-name" data-categories="Hexo"><span class="iconfont-archer">&#xe60a;</span>Hexo</span>
+    
         <span class="sidebar-category-name" data-categories="JAVA"><span class="iconfont-archer">&#xe60a;</span>JAVA</span>
     
-        <span class="sidebar-category-name" data-categories="Hexo"><span class="iconfont-archer">&#xe60a;</span>Hexo</span>
+        <span class="sidebar-category-name" data-categories="sql"><span class="iconfont-archer">&#xe60a;</span>sql</span>
     
     </div>
     <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
