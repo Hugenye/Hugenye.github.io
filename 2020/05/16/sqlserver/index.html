@@ -1,0 +1,1770 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <!-- title -->
+
+
+
+
+<!-- keywords -->
+
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="author" content="Hugenye">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="Hugenye">
+    
+    <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
+    
+    <meta name="description" content>
+    <meta name="description" content="数据库指令练习实验**1  数据库的创建与修改**  在查询分析器中创建数据库，名称为Tushuguan1，数据文件的初始大小10Mb，增量2Mb，限制大小50Mb。  1234567create database tushuguan1on primary(name=&apos;tushuguan1&apos;,filename=&apos;c:\shujuku\tushuguan1.mdf&apos;,size=10Mb,maxsiz">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sqlserver">
+<meta property="og:url" content="http://hugenye.github.io/2020/05/16/sqlserver/index.html">
+<meta property="og:site_name" content="Hugenye个人博客">
+<meta property="og:description" content="数据库指令练习实验**1  数据库的创建与修改**  在查询分析器中创建数据库，名称为Tushuguan1，数据文件的初始大小10Mb，增量2Mb，限制大小50Mb。  1234567create database tushuguan1on primary(name=&apos;tushuguan1&apos;,filename=&apos;c:\shujuku\tushuguan1.mdf&apos;,size=10Mb,maxsiz">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-08-19T08:35:30.931Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="sqlserver">
+<meta name="twitter:description" content="数据库指令练习实验**1  数据库的创建与修改**  在查询分析器中创建数据库，名称为Tushuguan1，数据文件的初始大小10Mb，增量2Mb，限制大小50Mb。  1234567create database tushuguan1on primary(name=&apos;tushuguan1&apos;,filename=&apos;c:\shujuku\tushuguan1.mdf&apos;,size=10Mb,maxsiz">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <link rel="alternate" href="/atom.xml" title="Hugenye的个人博客" type="application/atom+xml">
+    
+    <title>sqlserver · hugenye&#39;s Studio</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+</style>
+
+    <link rel="preload" href="/css/style.css?v=20180824" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="stylesheet" href="/css/mobile.css?v=20180824" media="(max-width: 980px)">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+(function( w ){
+	"use strict";
+	// rel=preload support test
+	if( !w.loadCSS ){
+		w.loadCSS = function(){};
+	}
+	// define on the loadCSS obj
+	var rp = loadCSS.relpreload = {};
+	// rel=preload feature support test
+	// runs once and returns a function for compat purposes
+	rp.support = (function(){
+		var ret;
+		try {
+			ret = w.document.createElement( "link" ).relList.supports( "preload" );
+		} catch (e) {
+			ret = false;
+		}
+		return function(){
+			return ret;
+		};
+	})();
+
+	// if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+	// then change that media back to its intended value on load
+	rp.bindMediaToggle = function( link ){
+		// remember existing media attr for ultimate state, or default to 'all'
+		var finalMedia = link.media || "all";
+
+		function enableStylesheet(){
+			link.media = finalMedia;
+		}
+
+		// bind load handlers to enable media
+		if( link.addEventListener ){
+			link.addEventListener( "load", enableStylesheet );
+		} else if( link.attachEvent ){
+			link.attachEvent( "onload", enableStylesheet );
+		}
+
+		// Set rel and non-applicable media type to start an async request
+		// note: timeout allows this to happen async to let rendering continue in IE
+		setTimeout(function(){
+			link.rel = "stylesheet";
+			link.media = "only x";
+		});
+		// also enable media after 3 seconds,
+		// which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+		setTimeout( enableStylesheet, 3000 );
+	};
+
+	// loop through link elements in DOM
+	rp.poly = function(){
+		// double check this to prevent external calls from running
+		if( rp.support() ){
+			return;
+		}
+		var links = w.document.getElementsByTagName( "link" );
+		for( var i = 0; i < links.length; i++ ){
+			var link = links[ i ];
+			// qualify links to those with rel=preload and as=style attrs
+			if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+				// prevent rerunning on link
+				link.setAttribute( "data-loadcss", true );
+				// bind listeners to toggle media back
+				rp.bindMediaToggle( link );
+			}
+		}
+	};
+
+	// if unsupported, run the polyfill
+	if( !rp.support() ){
+		// run once at least
+		rp.poly();
+
+		// rerun poly on an interval until onload
+		var run = w.setInterval( rp.poly, 500 );
+		if( w.addEventListener ){
+			w.addEventListener( "load", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		} else if( w.attachEvent ){
+			w.attachEvent( "onload", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		}
+	}
+
+
+	// commonjs
+	if( typeof exports !== "undefined" ){
+		exports.loadCSS = loadCSS;
+	}
+	else {
+		w.loadCSS = loadCSS;
+	}
+}( typeof global !== "undefined" ? global : this ) );
+</script>
+
+    <link rel="icon" href="/assets/hgy.ico">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js" as="script">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" as="script">
+    <link rel="preload" href="/scripts/main.js" as="script">
+    <link rel="preload" as="font" href="/font/Oswald-Regular.ttf" crossorigin>
+    <link rel="preload" as="font" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" crossorigin>
+    
+    <!-- fancybox -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+</head>
+
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="read-progress"></div>
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >Hugenye的个人博客</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">sqlserver</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href=/>Hugenye的个人博客</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro" style="
+
+
+
+
+
+
+
+height:50vh;
+">
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            sqlserver
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                
+                    <div class="post-intro-read">
+                        <span>字数统计: <span class="post-count word-count">6.9k</span>阅读时长: <span class="post-count reading-time">26 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2020/05/16</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+        <script>
+ 
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded');
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in');
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
+
+  function asyncErr(){
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (cb) { o.addEventListener('load', function (e) { cb(null, e); }, false); }
+    if (err) { o.addEventListener('error', function (e) { err(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+
+  var asyncLoadWithFallBack = function(arr, success, reject) {
+      var currReject = function(){
+        reject()
+        arr.shift()
+        if(arr.length)
+          async(arr[0], success, currReject)
+        }
+
+      async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack([
+    "https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", 
+    "https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js",
+    "/lib/webfontloader.min.js"
+  ], asyncCb, asyncErr)
+</script>        
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <h1 id="数据库指令练习"><a href="#数据库指令练习" class="headerlink" title="数据库指令练习"></a>数据库指令练习</h1><p><strong>实验**</strong>1  <strong><strong>数据库的创建与修改**</strong></strong></p>
+<ol>
+<li>在查询分析器中创建数据库，名称为Tushuguan1，数据文件的初始大小10Mb，增量2Mb，限制大小50Mb。</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">database</span> tushuguan1</span><br><span class="line"><span class="keyword">on</span> primary</span><br><span class="line">(<span class="keyword">name</span>=<span class="string">'tushuguan1'</span>,</span><br><span class="line">filename=<span class="string">'c:\shujuku\tushuguan1.mdf'</span>,</span><br><span class="line"><span class="keyword">size</span>=<span class="number">10</span>Mb,</span><br><span class="line"><span class="keyword">maxsize</span>=<span class="number">50</span>Mb,</span><br><span class="line">filegrowth=<span class="number">2</span>Mb);</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>在查询分析器中，为Tushuguan1增加一个事务日志文件，名称为TushuguanL，文件的初始大小15Mb，增量1 Mb，限制大小30Mb。</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">log on</span><br><span class="line">(name=N'tushuguanl',</span><br><span class="line">filename='c:\shujuku\tushuguanl.ldf',</span><br><span class="line">size=15Mb,</span><br><span class="line">maxsize=30Mb,</span><br><span class="line">filegrowth=1Mb);</span><br></pre></td></tr></table></figure>
+
+<p><strong>实验三**</strong>  <strong><strong>数据表的创建与修改（</strong></strong>2<strong><strong>）**</strong></strong></p>
+<p><strong>二．实验内容****</strong></p>
+<ol>
+<li>在Tushuguan1中，在查询分析器中创建下面三个表，定义表中要求的约束。</li>
+</ol>
+<p>学生信息表：student</p>
+<table>
+<thead>
+<tr>
+<th><strong>字段名称****</strong></th>
+<th><strong>数据类型****</strong></th>
+<th><strong>说明****</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>stuID</td>
+<td>Into 标识列(10000,10)</td>
+<td>学生编号，主键</td>
+</tr>
+<tr>
+<td>stuName</td>
+<td>Varchar(10)</td>
+<td>学生名称， 不为空</td>
+</tr>
+<tr>
+<td>major</td>
+<td>Varchar(50)</td>
+<td>专业 默认值（‘计算机’），不为空</td>
+</tr>
+<tr>
+<td>Sex</td>
+<td>Char(2)</td>
+<td>性别，检查约束，不为空</td>
+</tr>
+</tbody></table>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> student(</span><br><span class="line">stuID <span class="built_in">int</span> primary <span class="keyword">key</span>,</span><br><span class="line">stuName <span class="built_in">varchar</span>(<span class="number">10</span>) <span class="keyword">not</span> <span class="literal">null</span>,</span><br><span class="line">major <span class="built_in">varchar</span>(<span class="number">50</span>) <span class="keyword">not</span> <span class="literal">null</span> <span class="keyword">default</span> <span class="string">'计算机'</span>,</span><br><span class="line">sex <span class="built_in">char</span>(<span class="number">2</span>) <span class="keyword">check</span>(sex=<span class="string">'男'</span> <span class="keyword">or</span> sex=<span class="string">'女'</span>)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<p>图书表：book</p>
+<table>
+<thead>
+<tr>
+<th><strong>字段名称****</strong></th>
+<th><strong>数据类型****</strong></th>
+<th><strong>说明****</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>BID</td>
+<td>Int 标识列（10,1）</td>
+<td>图书编号，主键</td>
+</tr>
+<tr>
+<td>title</td>
+<td>char(50)</td>
+<td>书名 惟一性约束，不为空</td>
+</tr>
+<tr>
+<td>author</td>
+<td>char(20)</td>
+<td>作者 ，不为空</td>
+</tr>
+</tbody></table>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> book</span><br><span class="line">(BID <span class="built_in">int</span> primary <span class="keyword">key</span>,（BID <span class="built_in">int</span> <span class="keyword">identity</span>(<span class="number">10</span>,<span class="number">1</span>)书号胃标识列）</span><br><span class="line">title <span class="built_in">char</span>(<span class="number">50</span>) <span class="keyword">unique</span> <span class="keyword">not</span> <span class="literal">null</span>,</span><br><span class="line">author <span class="built_in">char</span>(<span class="number">20</span>) <span class="keyword">not</span> <span class="literal">null</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<p>计算所得列：总价AS 单价*数量</p>
+<p>“出版日期”为当前日期：出版日期Datetime DEFAULT(gettime())</p>
+<p>出版社只能是。。。CHECK(出版社 IN（’浙大’,’电子’,’中央“）)</p>
+<p>借书信息表：borrow</p>
+<table>
+<thead>
+<tr>
+<th><strong>字段名称****</strong></th>
+<th><strong>数据类型****</strong></th>
+<th><strong>说明****</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>borrowID</td>
+<td>char(10)</td>
+<td>借书编号，主键</td>
+</tr>
+<tr>
+<td>stuID</td>
+<td>int</td>
+<td>学生编号，外键</td>
+</tr>
+<tr>
+<td>BID</td>
+<td>Int</td>
+<td>图书编号，外键</td>
+</tr>
+<tr>
+<td>T_time</td>
+<td>datetime</td>
+<td>借书日期，不为空</td>
+</tr>
+<tr>
+<td>B_time</td>
+<td>datetime</td>
+<td>还书日期</td>
+</tr>
+</tbody></table>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> borrow(</span><br><span class="line">borrowID <span class="built_in">char</span>(<span class="number">10</span>) primary <span class="keyword">key</span>,</span><br><span class="line">stuID <span class="built_in">int</span>,</span><br><span class="line">BID <span class="built_in">int</span>,</span><br><span class="line">T_time datetimenot <span class="literal">null</span>,</span><br><span class="line">B_time datetime,</span><br><span class="line"><span class="keyword">foreign</span> <span class="keyword">key</span> (stuID) <span class="keyword">references</span> student(stuID),</span><br><span class="line"><span class="keyword">foreign</span> <span class="keyword">key</span> (BID) <span class="keyword">references</span> book(BID)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<p>要求：</p>
+<p>（1）在创建表时，约束定义在表的属性中。</p>
+<p>（2）创建表时，列只定义数据类型，是否为空等。再修改表添加约束。</p>
+<ol>
+<li>设置复合主键</li>
+</ol>
+<p>新建学生信息表：student1</p>
+<table>
+<thead>
+<tr>
+<th><strong>字段名称****</strong></th>
+<th><strong>数据类型****</strong></th>
+<th><strong>说明****</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>stuID</td>
+<td>Into 标识列(10000,10)</td>
+<td>学生编号</td>
+</tr>
+<tr>
+<td>stuName</td>
+<td>Varchar(10)</td>
+<td>学生名称</td>
+</tr>
+<tr>
+<td>major</td>
+<td>Varchar(50)</td>
+<td>专业</td>
+</tr>
+<tr>
+<td>score1</td>
+<td>int</td>
+<td>成绩</td>
+</tr>
+</tbody></table>
+<p>利用T－SQL设置复合主键（学生编号+学生姓名）</p>
+<p>CONSTRAINT 主键名 PRIMARY KEY(学生编号,学生姓名)</p>
+<ol>
+<li>创建约束</li>
+</ol>
+<p>创建score1列的成绩约束，要求在0－100之间。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> student1(</span><br><span class="line">stuID <span class="built_in">int</span>,</span><br><span class="line">stuName <span class="keyword">var</span> <span class="built_in">char</span>(<span class="number">10</span>),</span><br><span class="line">major <span class="keyword">var</span> <span class="built_in">char</span>(<span class="number">50</span>), </span><br><span class="line">score1 <span class="built_in">int</span> <span class="keyword">check</span>(score1&gt;=<span class="number">0</span> <span class="keyword">and</span> score1&lt;=<span class="number">100</span>),</span><br><span class="line">primary <span class="keyword">key</span>(stuID,stuName),</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>在三个表中添加一些数据，查看外键约束中如果选中：级联更新和级联删除后，更新主键数据和删除主键数据的情况。</li>
+</ol>
+<p>因为有外键约束  不能对表进行更新和删除</p>
+<ol>
+<li>观察去掉级联删除选项后，删除主键数据（外键存在引用的数据）的情况。</li>
+</ol>
+<p>去掉后 可以进行更新和删除</p>
+<p>6． 用 T-SQL插入新纪录，观察各种约束的情况</p>
+<ol>
+<li>数据表复制</li>
+</ol>
+<p>（1）在当前库中，将“学生信息表”中的stuName和major列的数据复制到一个新表中。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> temp (stuName,major) <span class="keyword">select</span> stuName,major <span class="keyword">from</span> student</span><br></pre></td></tr></table></figure>
+
+<p> （2）在当前库中，将“学生信息表”中的stuName和major列的数据复制到一个新表中。在新表中stuName列的别名为“学生姓名”，major列的别名为“专业”。</p>
+<p>select stuName as学生姓名,major as专业into student3</p>
+<p>from student </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>（3）将“学生信息表”中的stuName和major列的数据复制到数据库“abc”的一个新表中。</p>
+<p>insert intoabc.dbo.student4</p>
+<p>select stuName,majorfrom tushuguan1.dbo.student</p>
+<ol>
+<li>用 T-SQL删除纪录，观察各种约束的情况</li>
+</ol>
+<p>（1）单表删除记录，如删除student表中 专业为计算机的。删除“借书信息表”中，借书日期2009-1-1以前的。</p>
+<p>delete fromstudent where major=’计算机’</p>
+<p>delete fromborrow where T_time&lt;2009-1-1</p>
+<p>（2） 多表删除，删除“张三”的借书记录。</p>
+<p>delete </p>
+<p>from borrow,student</p>
+<p>where borrow.stuId=student.stuId</p>
+<p>（3）多表删除，删除“张三”并书名为“abcd”的借书记录。</p>
+<p>delete </p>
+<p>from borrow,book</p>
+<p>where borrow.stuId=(select stuID from student wherestuName=’张三’) andbook.title=’abcd’</p>
+<p><strong>实验四**</strong>  <strong><strong>数据查询（</strong></strong>1<strong><strong>）**</strong></strong></p>
+<p><strong>一．实验目的****</strong></p>
+<p>学习使用SQL Server的查询语句，熟练掌握简单查询、排序、汇总函数、分组、HAVING和汇总等基本的查询操作。</p>
+<p>1．基本语法</p>
+<p>SELECT子句是SELECT语句的核心部分，虽然 SELECT 语句的完整语法较复杂，但是其主要的子句可归纳如下：</p>
+<p><strong>SELECT select_list</strong></p>
+<p><strong>[INTO new_table_name]</strong></p>
+<p><strong>FROM table_list</strong></p>
+<p><strong>[WHERE search_conditions]</strong></p>
+<p><strong>[GROUP BY group_by_list]</strong></p>
+<p><strong>[HAVING search_conditions]</strong></p>
+<p><strong>[ORDER BY order_list [ASC | DESC] ]</strong></p>
+<p>其中：</p>
+<p><strong>select_list**</strong>：**表示需要检索的字段的列表。它是一个逗号分隔的表达式列表，列表中可以包含数据源表或视图中的字段名称。也可能是其它表达式，在选择列表中使用 * 表达式指定返回源表中的所有列。在此子句中，可以使用DISTINCT和TOP等关键字来限制结果集的范围。</p>
+<p><strong>INTO new_table_name**</strong>：**指定使用检索出的结果集来创建新表。新表的名称为new_table_name。</p>
+<p><strong>FROM table_list**</strong>：** 指定检索数据的数据源表的列表。</p>
+<p><strong>WHERE search_conditions**</strong>：**  WHERE子句是一个筛选，它定义了源表中的行要满足 SELECT 语句的要求所必须达到的条件。只有符合条件的行才向结果集提供数据。不符合条件的行中的数据不会被使用。</p>
+<p><strong>GROUP BY group_by_list**</strong>：**** ** GROUP BY 子句根据 group_by_list 列中的值将结果集分成组。</p>
+<p><strong>HAVING search_conditions**</strong>：**  HAVING子句是应用于结果集的附加筛选。逻辑上讲，HAVING 子句从中间结果集对行进行筛选，这些中间结果集是用 SELECT 语句中的 FROM、WHERE 或 GROUP BY 子句创建的。HAVING 子句通常与 GROUP BY 子句一起使用。</p>
+<p><strong>ORDER BY order_list [ ASC | DESC ]**</strong>：**  ORDERBY 子句定义结果集中的行排列的顺序。order_list 指定组成排序列表的结果集的列。ASC 和 DESC 关键字用于指定行是按升序还是按降序排序。</p>
+<p>除了以上子句，SELECT语句中经常出现的关键字还包括UNION运算符、COMPUTE子句、FOR子句和OPTION等子句。</p>
+<p>（1）     改变列的标题</p>
+<p>可以为显示的列重新起一个标题，比如：</p>
+<p>SELECT TOP 10 产品价格＝定价FROM 产品表</p>
+<p>或者利用 AS 关键词：</p>
+<p>SELECT TOP 10 定价 AS产品价格 FROM 产品表</p>
+<p>（2）     匹配查询条件</p>
+<p>模式匹配符有两种：LIKE 和 NOT  LIKE。它们主要用来进行模糊查询，判断列值是否与指定的字符串格式匹配。常用的 SQL Server 通配符有“%”和“_”</p>
+<p><strong>%**</strong>：**包含零个或更多字符的任意字符串。</p>
+<p><strong>_**</strong>（下划线）：**任何单个字符。</p>
+<p>（3）     汇总函数</p>
+<p>汇总函数（例如 SUM、AVG、COUNT、COUNT(<em>)、MAX 和 MIN）在查询结果集中生成汇总值。汇总函数（除 COUNT(</em>) 以外）处理单个列中全部所选的值以生成一个结果值。汇总函数可以应用于表中的所有行、WHERE 子句指定的表的子集或表中一组或多组行。应用汇总函数后，每组行都将生成一个值。表1显示了汇总函数的语法及结果（expression 几乎总为列名）。</p>
+<p>表1  汇总函数的语法</p>
+<table>
+<thead>
+<tr>
+<th>汇总函数</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>SUM([ALL |  DISTINCT] expression)</td>
+<td>数字表达式中所有值的和</td>
+</tr>
+<tr>
+<td>AVG([ALL |  DISTINCT] expression)</td>
+<td>数字表达式中所有值的平均值</td>
+</tr>
+<tr>
+<td>COUNT([ALL |  DISTINCT] expression)</td>
+<td>表达式中值的个数</td>
+</tr>
+<tr>
+<td>COUNT(*)</td>
+<td>选定的行数</td>
+</tr>
+<tr>
+<td>MAX(expression)</td>
+<td>表达式中的最高值</td>
+</tr>
+<tr>
+<td>MIN(expression)</td>
+<td>表达式中的最低值</td>
+</tr>
+</tbody></table>
+<p>（4）COMPUTE和COMPUTE  BY 子句</p>
+<p>生成合计作为附加的汇总列出现在结果集的最后。当与 BY 一起使用时，COMPUTE 子句在结果集内生成控制中断和分类汇总。可在同一查询内指定 COMPUTE BY 和 COMPUTE。格式为：</p>
+<p> COMPUTE 汇总函数（汇总函数表达式）      BY  分组字段</p>
+<p>汇总函数表达式是对其执行计算的列名。汇总函数表达式必须是选择列表中的一个项目，在汇总函数表达式内不能使用在选择列表中指定的列的别名。</p>
+<p>分组字段用来设置用于分类的字段名称、字段别名或表达式，而且这个字段别名必须出现在ORDER BY 子句中。</p>
+<p>如果使用 COMPUTE BY，则必须也使用 ORDER BY 子句。表达式必须与在 QRDER BY 后列出的子句相同或是其子集，并且必须按相同的序列。</p>
+<p>2．操作实例演示</p>
+<p>以下是某公司的产品销售数据库（ProductSales）中的产品表（Product）和销售表（Sales），产品表为主表，销售表为子表，表结构和存储的数据如表2、表3所示：</p>
+<p><strong>表**</strong>2 <strong><strong>产品表，主表**</strong></strong></p>
+<table>
+<thead>
+<tr>
+<th>产品编号（主键）</th>
+<th>产品名称（唯一性约束）</th>
+<th>定价</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>HP1200打印机</td>
+<td>2000</td>
+</tr>
+<tr>
+<td>2</td>
+<td>LX360兼容机</td>
+<td>4800</td>
+</tr>
+<tr>
+<td>3</td>
+<td>IBM 350笔记本</td>
+<td>11000</td>
+</tr>
+<tr>
+<td>4</td>
+<td>IBM 360笔记本</td>
+<td>12000</td>
+</tr>
+</tbody></table>
+<p>　</p>
+<p><strong>表**</strong>3  <strong><strong>销售表，子表**</strong></strong></p>
+<table>
+<thead>
+<tr>
+<th>产品号（外键）</th>
+<th>客户名称</th>
+<th>购买数量</th>
+<th>销售单价</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2</td>
+<td>河北工大</td>
+<td>10</td>
+<td>4500</td>
+</tr>
+<tr>
+<td>1</td>
+<td>河北工大</td>
+<td>25</td>
+<td>1600</td>
+</tr>
+<tr>
+<td>3</td>
+<td>天津大学</td>
+<td>10</td>
+<td>11000</td>
+</tr>
+<tr>
+<td>2</td>
+<td>天津大学</td>
+<td>30</td>
+<td>4600</td>
+</tr>
+<tr>
+<td>1</td>
+<td>天津大学</td>
+<td>20</td>
+<td>1800</td>
+</tr>
+<tr>
+<td>3</td>
+<td>河北大学</td>
+<td>40</td>
+<td>10000</td>
+</tr>
+<tr>
+<td>3</td>
+<td>南开大学</td>
+<td>20</td>
+<td>10500</td>
+</tr>
+</tbody></table>
+<p>编写SQL语句实现以下要求的查询：</p>
+<p>（1）查询出单笔购买数量大于15的客户名称、购买数量、销售单价信息；</p>
+<p><strong>select **</strong>客户名称<strong><strong>,</strong></strong>购买数量<strong><strong>,</strong></strong>销售单价<strong>** from **</strong>销售表<strong>** where **</strong>购买数量<strong>**&gt;15</strong></p>
+<pre><code>（2）查询出产品号，客户名称，购买数量，按产品号排序。</code></pre><p><strong>select **</strong>产品号<strong><strong>,</strong></strong>客户名称<strong><strong>,</strong></strong>购买数量<strong>** from **</strong>销售表<strong>** order by **</strong>产品号<strong>**</strong></p>
+<p>（3）查询出产品号，客户名称，购买数量，产品号升序，购买数量降序</p>
+<p><strong>select **</strong>产品号<strong><strong>,</strong></strong>客户名称<strong><strong>,</strong></strong>购买数量<strong>** from **</strong>销售表<strong>** order by **</strong>产品号<strong><strong>,</strong></strong>购买数量<strong>** desc</strong></p>
+<p>（4）查询出购买数量最多（单笔）前三位的记录。</p>
+<p><strong>select top 3 *from **</strong>销售表<strong>** order by **</strong>购买数量<strong>** desc</strong></p>
+<p>（5）查询出所有商品的全部销售金额。</p>
+<p><strong>select sum(**</strong>购买数量<strong>*****</strong>销售单价<strong>*<em>) as *</em></strong>销售总额<strong>** from **</strong>销售表<strong>**</strong></p>
+<p>（6）查询销售单价最高和最低的记录。</p>
+<p><strong>select max(**</strong>销售单价<strong>*<em>) as *</em></strong>最高单价<strong><strong>,min(</strong></strong>销售单价<strong>*<em>)as *</em></strong>最低单价<strong>** from **</strong>销售表<strong>**</strong></p>
+<p>（7）查询总共有多少笔销售记录。</p>
+<p><strong>select count(*) as**</strong>记录数<strong>** from **</strong>销售表<strong>**</strong></p>
+<p>（8）查询客户姓名、对应客户的平均每笔购买数量。</p>
+<p><strong>select **</strong>客户名称<strong><strong>,avg(</strong></strong>购买数量<strong>*<em>) as *</em></strong>平均购买量<strong>** from **</strong>销售表<strong>** group by **</strong>客户名称**</p>
+<p>（9）查询出每种产品最高价高于2000的产品号和最高单价。</p>
+<p><strong>select **</strong>产品号<strong><strong>, max(</strong></strong>销售单价<strong>*<em>) from *</em></strong>销售表<strong>** group by **</strong>产品号<strong>** having max(**</strong>销售单价<strong>**)&gt;2000</strong></p>
+<p>（10）查询出全部销售记录，并汇总总销售量和销售记录数。</p>
+<p><strong>select * from **</strong>销售表<strong>** compute sum(**</strong>购买数量<strong><strong>),count(</strong></strong>购买数量<strong>**)</strong></p>
+<p>(11) 查询 “产品表”中产品名称含有IBM的记录。</p>
+<p><strong>select * from **</strong>产品表<strong>** WHERE **</strong>产品名称<strong>** like ‘%IBM%’</strong></p>
+<p><strong>三．实验内容****</strong></p>
+<p>创建表2、表3所示的产品表和销售表，编写SQL语句实现以下的要求：</p>
+<ol>
+<li>查询出销售单价最低（单笔）的前50％的记录。</li>
+</ol>
+<p>select top 50 percent * from sale</p>
+<p>order by 销售单价</p>
+<ol>
+<li>查询出产品号，客户名称，购买数量，产品号升序，客户名称降序。</li>
+</ol>
+<p>select 产品号,客户名称,购买数量 from sale</p>
+<p>order by 产品号,客户名称 desc</p>
+<ol>
+<li>查询所有商品的销售总数。</li>
+</ol>
+<p>select 产品号,sum(购买数量) as 销售总数 from sale</p>
+<p>group by 产品号</p>
+<ol>
+<li>查询共有几家客户（不重复）。</li>
+</ol>
+<p>select count(distinct 客户名称) as 客户数from sale</p>
+<ol>
+<li>查询客户姓名、对应客户的销售总金额。</li>
+</ol>
+<p>select 客户名称,sum(购买数量*销售单价) as 销售总金额from sale group by客户名称</p>
+<ol>
+<li>查询每种产品的产品号和相应的每单位的平均销售单价。</li>
+</ol>
+<p>select 产品号,avg(销售单价)as 平均销售单价from sale group by 产品号</p>
+<ol>
+<li>查询每种产品中每个客户购买的最高销售单价。</li>
+</ol>
+<p>select distinct产品号,max(销售单价)as 最高销售单价from sale groupby 产品号</p>
+<ol>
+<li>查询出全部销售记录，并汇总每种产品的总销售量和销售记录数。</li>
+</ol>
+<p>select * fromsale  computesum(购买数量) ,count(购买数量)</p>
+<ol>
+<li>查询产品号,客户名称,购买数量,销售单价,(购买数量*销售单价) as 销售额，并汇总每种产品的销售数量和总销售额。</li>
+</ol>
+<p>select 产品号,客户名称,购买数量,销售单价,(购买数量*销售单价) as 销售额from sale</p>
+<p>compute sum(购买数量),sum(购买数量*销售单价)</p>
+<ol start="10">
+<li>查询 “销售表”的客户名称字段中以“大学”结尾的记录</li>
+</ol>
+<p>select * from sale where 客户名称like ‘%大学’</p>
+<ol start="11">
+<li>查询购买数量最高和最低的记录。</li>
+</ol>
+<p>select * from sale compute max(购买数量),min(购买数量)</p>
+<p><strong>实验**</strong>5  <strong><strong>数据查询（</strong></strong>2<strong><strong>）**</strong></strong></p>
+<p><strong>一．实验目的****</strong></p>
+<p>学习使用SQL Server的查询语句，掌握内连接、外连接和交叉连接，掌握子查询。</p>
+<p>（一）基本语法</p>
+<p>1．内联接</p>
+<p>内联接是用比较运算符比较要联接列的值的联接。格式为：</p>
+<p>**         <strong><strong>数据表</strong></strong>1  INNER JOIN  <strong><strong>数据表</strong></strong>2  ON  <strong><strong>联接表达式**</strong></strong></p>
+<p>此内联接称为相等联接。它返回两个表中的所有列，但只返回在联接列中具有相等值的行。在内连接中，所有表是平等的，没有主次之分。</p>
+<p>当创建内联接时，包含 NULL 的列不与任何值匹配，因此不包括在结果集内。空值不与其它的空值匹配。</p>
+<p>2．外联接</p>
+<p>与内连接相对，参与外连接的表有主次之分。以主表的每一行数据去匹配从表中的数据列，符合连接条件的数据将直接返回到结果集中，对那些不符合连接条件的列，将被填上NULL值后再返回到结果集中。</p>
+<p>外连接可以分为左（向外）连接、右（向外）连接和完整外部连接三类。</p>
+<p>（1）左联接</p>
+<p>格式为：</p>
+<p>   <strong>数据表**</strong>1   LEFT JOIN  <strong><strong>数据表</strong></strong>2  ON  <strong><strong>联接表达式**</strong></strong></p>
+<p>左连接以连接（JOIN）子句左侧的表为主表，主表中所有记录都将出现在结果集中。如果主表中的记录在右表中没有匹配的数据，则结果集中右表的列值为NULL。在WHERE子句中，可以使用*=符号定义左连接。</p>
+<p>（2）右联接</p>
+<p>格式为：</p>
+<p> **  <strong><strong>数据表</strong></strong>1   RIGHT JOIN  <strong><strong>数据表</strong></strong>2  ON  <strong><strong>联接表达式**</strong></strong></p>
+<p>右连接以连接（JOIN）子句右侧的表为主表，主表中所有记录都将出现在结果集中。如果主表中的记录在左表中没有匹配的数据，则结果集中左表的列值为NULL。在WHERE子句中，可以使用=*符号定义右连接。</p>
+<p>（3）完整外联接</p>
+<p>格式为：</p>
+<p>**   <strong><strong>数据表</strong></strong>1   FULL JOIN  <strong><strong>数据表</strong></strong>2  ON  <strong><strong>联接表达式**</strong></strong></p>
+<p>完整外部连接包括连接表中的所有行，无论它们是否匹配。</p>
+<p>3．交叉联接</p>
+<p>格式为：</p>
+<p> **  <strong><strong>数据表</strong></strong>1   CROSS JOIN  <strong><strong>数据表</strong></strong>2 <strong>**</strong></p>
+<p>在交叉连接查询中，两个表中的每两行都可能互相组合成为结果集中的一行。交叉联接不使用WHERE子句。数学上，交叉联接就是笛卡儿集。第一个表的行数乘以第二个表的行数等于笛卡儿集的大小。</p>
+<p>4．嵌套查询</p>
+<p>嵌套查询是指在一个外层查询中包含有一个内查询。即在WHERE子句中包含一个形如SELECT－FROM－WHERE的查询块，此查询块称为子查询或嵌套查询。</p>
+<p>子查询在WHERE语句中的一般用法：</p>
+<p>**    SELECT … FROM <strong><strong>表</strong></strong>1 WHERE<strong><strong>字段</strong></strong>1 &gt;(<strong><strong>子查询</strong></strong>)**</p>
+<p>括号中嵌入的查询称为子查询，外面的查询称为父查询或外部查询，外查询称为主查询。</p>
+<p>一般情况下，套查询在执行时由里向外处理，每个子查询是在上一级外部查询处理之前完成，主查询要用到子查询的结果。即先用内查询挑选出部分数据，作为外查询的数据来源或搜索条件。将子查询和比较运算符联合使用，必须保证子查询返回的值不能多于一个。 </p>
+<p>子查询还常和UPDATE、INSERT、DELETE一起使用，语法类似于SELECT语句。 </p>
+<p>（1）带有IN或NOT IN谓词的子查询</p>
+<p>在嵌套查询中，子查询的结果往往是一个集合，IN或NOT IN关键字用于确定给定的值是否包含在子查询返回的结果集合中。</p>
+<p>l  IN后面的子查询可以返回多条记录</p>
+<p>l  常用IN替换等于（＝）的比较子查询</p>
+<p>（2）带有EXISTS或 NOT EXISTS谓词的子查询</p>
+<p>EXISTS表示存在量词，带有EXISTS的子查询不返回任何实际数据，它只得到逻辑值“真”或“假”。 EXISTS子查询的语法：</p>
+<p>**                  IF EXISTS <strong><strong>（子查询）**</strong></strong></p>
+<p>**                      <strong><strong>语句**</strong></strong></p>
+<p>如果子查询的结果非空，即记录条数1条以上，则EXISTS （子查询）将返回真（true），否则返回假（false）。 </p>
+<p>EXISTS也可以作为WHERE 语句的子查询，其语法是：</p>
+<p><strong>WHERE [NOT] EXISTS (**</strong>子查询<strong>**)</strong></p>
+<p>当子查询的查询结果集合为非空时，外层的WHERE子句返回真值，否则返回假值。NOT EXISTS与此相反。</p>
+<p>含有IN的查询通常可用EXISTS表示，但反过来不一定。</p>
+<p>5．合并查询</p>
+<p>合并查询UNION 运算符将两个或多个 SELECT 语句的结果组合成一个结果集，该结果集包含联合查询中的所有查询的全部行。使用UNION运算符组合两个查询的结果集的两个前提是：</p>
+<p>l  所有查询结果中的列数和列的顺序必须相同；</p>
+<p>l  对应列的数据类型必须兼容。</p>
+<p>合并查询经常用来返回明细和统计信息。因为明细和统计信息需要分别统计，所以可以使用合并查询将它们统一到一个结果集中。</p>
+<p>注意事项：</p>
+<p>l  UNION 的结果集列名与 UNION 运算符中第一个 SELECT 语句的结果集中的列名相同。另一个 SELECT 语句的结果集列名将被忽略。</p>
+<p>l  默认情况下，UNION 运算符从结果集中删除重复的行。如果使用 ALL 关键字，那么结果中将包含所有行并且将不删除重复的行。 </p>
+<p>l  合并查询中只能使用一个ORDER BY子句，它对整个结果集起作用。如果分别为每个SELECT语句指定ORDER BY子句，将会出现错误。</p>
+<p>（二）操作实例演示</p>
+<p>以下是某公司的产品销售数据库中的产品表、销售表和库存表，产品表为主表，销售表和库存表为子表，表结构和存储的数据如表1、表2和表3 所示：</p>
+<p><strong>表**</strong>1 <strong><strong>产品表，主表**</strong></strong></p>
+<table>
+<thead>
+<tr>
+<th>产品编号（主键）</th>
+<th>产品名称（唯一性约束）</th>
+<th>定价</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>HP1200打印机</td>
+<td>2000</td>
+</tr>
+<tr>
+<td>2</td>
+<td>LX360兼容机</td>
+<td>4800</td>
+</tr>
+<tr>
+<td>3</td>
+<td>IBM 350笔记本</td>
+<td>11000</td>
+</tr>
+<tr>
+<td>4</td>
+<td>IBM 360笔记本</td>
+<td>12000</td>
+</tr>
+</tbody></table>
+<p>　</p>
+<p><strong>表**</strong>2  <strong><strong>销售表，子表**</strong></strong></p>
+<table>
+<thead>
+<tr>
+<th>产品号（外键）</th>
+<th>客户名称</th>
+<th>购买数量</th>
+<th>销售单价</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2</td>
+<td>河北工大</td>
+<td>10</td>
+<td>4500</td>
+</tr>
+<tr>
+<td>1</td>
+<td>河北工大</td>
+<td>25</td>
+<td>1600</td>
+</tr>
+<tr>
+<td>3</td>
+<td>天津大学</td>
+<td>10</td>
+<td>11000</td>
+</tr>
+<tr>
+<td>2</td>
+<td>天津大学</td>
+<td>30</td>
+<td>4600</td>
+</tr>
+<tr>
+<td>1</td>
+<td>天津大学</td>
+<td>20</td>
+<td>1800</td>
+</tr>
+<tr>
+<td>3</td>
+<td>河北大学</td>
+<td>40</td>
+<td>10000</td>
+</tr>
+<tr>
+<td>3</td>
+<td>南开大学</td>
+<td>20</td>
+<td>10500</td>
+</tr>
+</tbody></table>
+<p><strong>表**</strong>3 <strong><strong>库存表（原始的库存表，包括上面销售表的数量）**</strong></strong></p>
+<table>
+<thead>
+<tr>
+<th>产品编号（主键）</th>
+<th>库存数量</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>200</td>
+</tr>
+<tr>
+<td>2</td>
+<td>320</td>
+</tr>
+<tr>
+<td>3</td>
+<td>160</td>
+</tr>
+<tr>
+<td>4</td>
+<td>500</td>
+</tr>
+</tbody></table>
+<p>编写SQL语句实现以下要求的查询：</p>
+<p>（1）查询出每笔销售记录的产品名称、客户名称、销售单价（分别用where 子句 和 join 实现）</p>
+<p><strong>select a1.**</strong>产品名称<strong><strong>,a2.</strong></strong>客户名称<strong><strong>,a2.</strong></strong>销售单价<strong>** from **</strong>产品表<strong>** as a1,**</strong>销售表<strong>** as a2 WHERE a1.**</strong>产品编号<strong><strong>=a2.</strong></strong>产品号<strong>**</strong></p>
+<p><strong>select a1.**</strong>产品名称<strong><strong>,a2.</strong></strong>客户名称<strong><strong>,a2.</strong></strong>销售单价<strong>** from **</strong>产品表<strong>** as a1 inner join **</strong>销售表<strong>** as a2 on a1.**</strong>产品编号<strong><strong>=a2.</strong></strong>产品号<strong>**</strong></p>
+<p>（2）查询出每笔销售的产品名称、销售数量和剩余库存数量。(用where用inner join )</p>
+<p><strong>select a1.**</strong>产品名称<strong><strong>,a2.</strong></strong>购买数量<strong><strong>,a3.</strong></strong>库存数量<strong><strong>-a2.</strong></strong>购买数量<strong>** as **</strong>剩余库存<strong>** from **</strong>产品表<strong>** as a1,**</strong>销售表<strong>** as a2,**</strong>库存表<strong>** as a3 WHERE a1.**</strong>产品编号<strong><strong>=a2.</strong></strong>产品号<strong>** and a2.**</strong>产品号<strong><strong>=a3.</strong></strong>产品编号<strong>**</strong></p>
+<p><strong>select a1.**</strong>产品名称<strong><strong>,a2.</strong></strong>购买数量<strong><strong>,a3.</strong></strong>库存数量<strong><strong>-a2.</strong></strong>购买数量<strong>** as **</strong>剩余库存<strong>** from (**</strong>产品表<strong>** as a1 inner join **</strong>销售表<strong>** as a2 on a1.**</strong>产品编号<strong><strong>=a2.</strong></strong>产品号<strong>** )inner join **</strong>库存表<strong>** as a3  on a2.**</strong>产品号<strong><strong>=a3.</strong></strong>产品编号<strong>**</strong></p>
+<p>（3）查看产品名称和客户名称的交叉查询的结果</p>
+<p><strong>select a1.**</strong>产品名称<strong><strong>,a2.</strong></strong>客户名称<strong>** from **</strong>产品表<strong>** as a1 cross join **</strong>销售表<strong>** as a2</strong></p>
+<p>（4）查询出销售单价最高和最低的销售记录。用“UNION”连接查询结果集。</p>
+<p><strong>select * from **</strong>销售表<strong>** where **</strong>销售单价<strong>** in (select max(**</strong>销售单价<strong>*<em>) from *</em></strong>销售表<strong>** union select min(**</strong>销售单价<strong>*<em>) from *</em></strong>销售表<strong>**)</strong></p>
+<p>方法四</p>
+<p>select *</p>
+<p>from sale</p>
+<p>where 销售单价in((select top 1 销售单价</p>
+<p>from sale orderby 销售单价desc)</p>
+<p>union </p>
+<p>(select top 1 销售单价</p>
+<p>from sale orderby 销售单价))</p>
+<p>方法一</p>
+<p>select *</p>
+<p>from sale</p>
+<p>where 销售单价= (select top 1 销售单价</p>
+<p>from sale orderby 销售单价desc)</p>
+<p>union</p>
+<p>select *</p>
+<p>from sale</p>
+<p>where 销售单价= (select top 1 销售单价</p>
+<p>from sale orderby 销售单价)</p>
+<p>方法二</p>
+<p>select *</p>
+<p>from sale</p>
+<p>where 销售单价= (select max(销售单价)</p>
+<p>from sale )</p>
+<p>union</p>
+<p>select *</p>
+<p>from sale</p>
+<p>where 销售单价= (select min(销售单价)</p>
+<p>from sale )</p>
+<p>方法三</p>
+<p>select * from sale where 销售单价in (select max(销售单价) from sale </p>
+<p>union select min(销售单价) fromsale)****</p>
+<p>（5）查询出已经销售出的产品名称。</p>
+<p><strong>select * from **</strong>产品表<strong>** where **</strong>产品编号<strong>** in (select **</strong>产品号<strong>** from **</strong>销售表<strong>**)</strong></p>
+<p>（6）如果某种产品的总销售数量超过了50，则所有产品库存增加50，否则，增加10。</p>
+<p><strong>if exists(selectsum(**</strong>购买数量<strong>*<em>) from *</em></strong>销售表<strong>** group by **</strong>产品号<strong>** having sum(**</strong>购买数量<strong>**)&gt;50)</strong></p>
+<p>**        update <strong><strong>库存表</strong></strong> set <strong><strong>库存数量</strong></strong>=<strong><strong>库存数量</strong></strong>+50**</p>
+<p><strong>else</strong></p>
+<p>**        update <strong><strong>库存表</strong></strong> set <strong><strong>库存数量</strong></strong>=<strong><strong>库存数量</strong></strong>+10**</p>
+<p><strong>三．实验内容****</strong></p>
+<p>创建表1、表2和表3所示的产品表、销售表和库存表，编写SQL语句实现以下的要求：</p>
+<ol start="12">
+<li>查询出单笔售数量大于15的客户名称、产品名称、销售数量信息；（分别用where字句 和join 实现）</li>
+</ol>
+<p>select 客户名称,产品名称,购买数量as 销售数量from product,sale</p>
+<p>where product.产品编号=sale.产品号and 购买数量&gt;15</p>
+<p>select 客户名称,产品名称,购买数量as 销售数量from product joinsale</p>
+<p>on product.产品编号=sale.产品号 and 购买数量&gt;15</p>
+<ol start="13">
+<li>查询每种产品的销售记录，列出产品名称和销售数量。（分别左连接和右连接）（分别用where 字句 和 join 实现）</li>
+</ol>
+<p>select 产品名称,购买数量as 销售数量from product leftjoin sale onproduct.产品编号=sale.产品号 </p>
+<p>select 产品名称,购买数量as 销售数量from product rightjoin sale onproduct.产品编号=sale.产品号 </p>
+<p>select 产品名称,购买数量as 销售数量from product,sale</p>
+<p>where product.产品编号=sale.产品号</p>
+<ol start="14">
+<li>在销售表添加一条记录， 8，相机，30，2100。查看完全外连接的结果。</li>
+</ol>
+<p>insert intosale</p>
+<p>values (8,’相机’,30,2100)</p>
+<ol start="15">
+<li>查询出销售单价最高的销售记录。</li>
+</ol>
+<p>select * from sale where 销售单价in (select max(销售单价) from sale)</p>
+<p>select * from sale where 销售单价in (select top 1 销售单价from sale orderby 销售单价desc)</p>
+<p> 此处最好不要用“=” 因为可能有多条记录</p>
+<ol start="16">
+<li>查询出销售单价最高和最低的销售记录的产品名称、客户名称、销售单价。</li>
+</ol>
+<p>select 产品名称,客户名称,销售单价</p>
+<p>from sale,product</p>
+<p>where product.产品编号=sale.产品号and 销售单价= (select max(销售单价)</p>
+<p>from sale )</p>
+<p>union</p>
+<p>select 产品名称,客户名称,销售单价</p>
+<p>from sale,product</p>
+<p>where product.产品编号=sale.产品号and 销售单价= (select min(销售单价)</p>
+<p>from sale )</p>
+<ol start="17">
+<li>查看产品表中产品编号和产品名称与销售表中客户名称和购买数量的交叉查询的结果。</li>
+</ol>
+<p>select 产品编号,产品名称,客户名称,购买数量</p>
+<p>from product crossjoin sale</p>
+<ol start="18">
+<li>查询出没有销售的产品名称。</li>
+</ol>
+<p>select 产品名称from product</p>
+<p>where 产品编号not in (select distinct 产品号from sale)</p>
+<ol start="19">
+<li>如果某种产品的总销售数量超过了50，则该种产品库存增加50，其余的产品库存增加10（子查询where字句中分别用exists和in 来实现）。</li>
+</ol>
+<p>if exists(select sum(购买数量) from sale group by 产品号having sum(购买数量)&gt;50)</p>
+<pre><code>update kucun set 库存数量=库存数量+50</code></pre><p>else</p>
+<pre><code>update kucun set 库存数量=库存数量+10</code></pre><p><strong>实验七**</strong> <strong><strong>视图、索引的建立与使用**</strong></strong></p>
+<p><strong>一．实验目的****</strong></p>
+<p>掌握使用创建视图的方法，了解如何应用视图有选中地查看所需数据，并熟悉通过视图操作数据表中数据的方法。</p>
+<p>掌握创建索引的方法。</p>
+<p><strong>二．实验内容****</strong></p>
+<p>以下是某公司的产品销售数据库中的产品表、销售表和库存表，产品表为主表，销售表和库存表为子表，表结构和存储的数据如表1、表2和表3 所示。</p>
+<p>创建销售数据库及表、表2和表3所示的产品表、销售表和库存表，编写T－SQL语句实现以下要求：</p>
+<ol>
+<li>创建视图，包含列：产品名称=产品表.产品名，客户名称=销售表.客户名称，销售数量=销售表.购买数量，购买数量&gt;12，分别在（企业管理器和用T-SQL）实现。</li>
+</ol>
+<p>create viewpr_sa</p>
+<p>as</p>
+<p>select product.产品名称as 产品名称,sale.客户名称,sale.购买数量as 销售数量</p>
+<p>from product,sale</p>
+<p>where product.产品编号=sale.产品号and 购买数量&gt;12</p>
+<ol>
+<li>查询（1）中的视图，查询出每种产品的销售总量</li>
+</ol>
+<p>select sum(销售数量)as 销售总量from pr_sa</p>
+<p>group by 产品名称。</p>
+<ol>
+<li>销售表中对客户名称建立索引（企业管理器和T-SQL），填充因子30，并查询客户名称为“河北工大”的记录。</li>
+</ol>
+<p>create </p>
+<p>index in_name onsale(客户名称)</p>
+<p>with pad_index,fillfactor=30</p>
+<p>select * from sale where 客户名称=’河北工大’</p>
+<ol>
+<li>产品表中对产品名称建立唯一索引（非聚集索引），并查询包含“IBM”的记录。</li>
+</ol>
+<p>create unique</p>
+<p>index in_product onproduct(产品名称)</p>
+<p>select 产品名称from product</p>
+<p>where 产品名称like ‘%IBM%’</p>
+<ol>
+<li>对产品表的产品名称和定价列建立复合索引。</li>
+</ol>
+<p>create indexin_fuhe on product(产品名称,定价)</p>
+<p>数据库文件分为：1、主数据文件（每个数据库有且只有一个主数据文件  .mdf）2、次数据文件（.ndf  一个数据库可以有多个次数据文件，也可以没有）3、日志文件（.ldf  可有一个或多个日志文件 ）</p>
+
+    </article>
+    <!-- license  -->
+    
+        <div class="license-wrapper">
+            <p>原文作者：<a href="http://hugenye.github.io">Hugenye</a>
+            <p>原文链接：<a href="http://hugenye.github.io/2020/05/16/sqlserver/">http://hugenye.github.io/2020/05/16/sqlserver/</a>
+            <p>发表日期：<a href="http://hugenye.github.io/2020/05/16/sqlserver/">五月 16日 2020, 5:34:12 下午</a>
+            <p>更新日期：<a href="http://hugenye.github.io/2020/05/16/sqlserver/">August 19th 2020, 4:35:30 pm</a>
+            <p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
+    
+    <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href= "/2020/05/19/vue/" title= "vue">
+                    <div class="nextTitle">vue</div>
+                </a>
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2020/04/24/old-work/" title= "以前工作内容（搬运网易云笔记）">
+                    <div class="prevTitle">以前工作内容（搬运网易云笔记）</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    
+    <!-- gitalk评论 -->
+
+    <!-- utteranc评论 -->
+
+<script src='https://utteranc.es/client.js'
+                repo='hugenye/gitalk'
+                issue-term='pathname'
+                label='utteranc'
+                theme='github-light'
+                crossorigin='anonymous'
+                async>
+</script>
+
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
+    
+    
+
+    <!-- 评论 -->
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:hugenye66@163.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/Hugenye" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+            
+                <span class="iconfont-archer wechat" title=wechat>
+                  
+                  <img class="profile-qr" src="/assets/weixin.jpg" />
+                </span>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+            
+                <a href="/atom.xml" class="iconfont-archer rss" target="_blank" title=rss></a>
+            
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+    <div class="busuanzi-container">
+    
+     
+    <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+    
+    </div>
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#数据库指令练习"><span class="toc-number">1.</span> <span class="toc-text">数据库指令练习</span></a></li></ol>
+    </div>
+    
+    <div class="back-top iconfont-archer">&#xe639;</div>
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-panel-archives">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 18
+        </div>
+        <!-- search  -->
+        
+            <div class="site-search popup-trigger">
+                <span class="iconfont-archer search-icon">&#xe627;</span>
+            </div>
+        
+    </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2020 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/18</span><a class="archive-post-title" href= "/2020/08/18/javascript/" >网页三剑客之JavaScript</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/18</span><a class="archive-post-title" href= "/2020/08/18/css/" >网页三剑客之CSS</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/17</span><a class="archive-post-title" href= "/2020/08/17/html/" >网页三剑客（HTML+CSS+JavaScript）之HTML</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/21</span><a class="archive-post-title" href= "/2020/07/21/hexo-deploy/" >Hexo archer主题配置</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/21</span><a class="archive-post-title" href= "/2020/07/21/double/" >Hexo速度提升</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/18</span><a class="archive-post-title" href= "/2020/07/18/jdk8/" >JDK8新特性</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/19</span><a class="archive-post-title" href= "/2020/05/19/vue/" >vue</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/16</span><a class="archive-post-title" href= "/2020/05/16/sqlserver/" >sqlserver</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/24</span><a class="archive-post-title" href= "/2020/04/24/old-work/" >以前工作内容（搬运网易云笔记）</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/16</span><a class="archive-post-title" href= "/2020/04/16/mysql/" >MySQL数据库</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/24</span><a class="archive-post-title" href= "/2020/03/24/amcharts/" >amCharts图表插件学习</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/13</span><a class="archive-post-title" href= "/2020/03/13/auto/" >自动化测试学习</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2019 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/10</span><a class="archive-post-title" href= "/2019/12/10/http/" >http</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/29</span><a class="archive-post-title" href= "/2019/09/29/exercises/" >网上习题</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/24</span><a class="archive-post-title" href= "/2019/09/24/python/" >Python学习</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/22</span><a class="archive-post-title" href= "/2019/09/22/interview/" >面试题</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/13</span><a class="archive-post-title" href= "/2019/07/13/bootstrap/" >Bootstrap</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/16</span><a class="archive-post-title" href= "/2019/06/16/aliba/" >企业部署阿里云服务器(Windows)</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name" data-tags="阿里云服务器部署"><span class="iconfont-archer">&#xe606;</span>阿里云服务器部署</span>
+    
+        <span class="sidebar-tag-name" data-tags="python"><span class="iconfont-archer">&#xe606;</span>python</span>
+    
+        <span class="sidebar-tag-name" data-tags="面试题"><span class="iconfont-archer">&#xe606;</span>面试题</span>
+    
+        <span class="sidebar-tag-name" data-tags="Hexo"><span class="iconfont-archer">&#xe606;</span>Hexo</span>
+    
+        <span class="sidebar-tag-name" data-tags="http"><span class="iconfont-archer">&#xe606;</span>http</span>
+    
+        <span class="sidebar-tag-name" data-tags="Hexo主题配置"><span class="iconfont-archer">&#xe606;</span>Hexo主题配置</span>
+    
+        <span class="sidebar-tag-name" data-tags="前端"><span class="iconfont-archer">&#xe606;</span>前端</span>
+    
+        <span class="sidebar-tag-name" data-tags="工作"><span class="iconfont-archer">&#xe606;</span>工作</span>
+    
+        <span class="sidebar-tag-name" data-tags="JDK8新特性"><span class="iconfont-archer">&#xe606;</span>JDK8新特性</span>
+    
+        <span class="sidebar-tag-name" data-tags="Bootstrap"><span class="iconfont-archer">&#xe606;</span>Bootstrap</span>
+    
+        <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
+    
+        <span class="sidebar-tag-name" data-tags="面试"><span class="iconfont-archer">&#xe606;</span>面试</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: true
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+        <span class="sidebar-category-name" data-categories="Hexo"><span class="iconfont-archer">&#xe60a;</span>Hexo</span>
+    
+        <span class="sidebar-category-name" data-categories="JAVA"><span class="iconfont-archer">&#xe60a;</span>JAVA</span>
+    
+        <span class="sidebar-category-name" data-categories="sql"><span class="iconfont-archer">&#xe60a;</span>sql</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var siteMeta = {
+        root: "/",
+        author: "Hugenye"
+    }
+</script>
+    <!-- CDN failover -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ === 'undefined')
+        {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js">\x3C/script>')
+        }
+    </script>
+    <script src="/scripts/main.js"></script>
+    <!-- algolia -->
+    
+        <div class="site-search">
+  <div class="algolia-popup popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="iconfont-archer">&#xe609;</i>
+    </span>
+  </div>
+</div>
+        <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.8.0/dist/instantsearch.min.js" defer></script>
+        <script src="/scripts/search.js" defer></script>
+    
+    <!-- busuanzi  -->
+    
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- CNZZ  -->
+    
+    </div>
+    <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
+     
+    </body>
+</html>
+
+
